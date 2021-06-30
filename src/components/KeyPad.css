@@ -1,0 +1,89 @@
+.keypad {
+    width: 300px; 
+    height: 350px;
+    border: 3px solid black;
+    border-radius: 8px;
+  }
+  
+  .keyCodeContainer {
+    background-color: darkslategrey;
+    margin-top: 10px;
+    height: 50px;
+    width: 250px;
+    text-align: center;
+    margin-left:22px;
+  }
+  
+  .keyCode {
+    padding-top: 5px;
+    font-size: 24pt;
+    color: orangered;
+    letter-spacing: 6px;
+    vertical-align: text-bottom;
+  }
+  
+  .keyboard{
+    padding-left:15px;
+    /*padding-right:15px;*/
+  }
+  
+  .key {
+    border: 3px solid rgb(255, 69, 0);
+    border-radius: 8px;
+    color: rgb(255, 69, 0);
+    cursor: pointer;
+  
+    background-image: -webkit-gradient(linear,left top,left bottom,from(), to(rgb(255, 69, 0)));
+    background-image: -webkit-linear-gradient(top,#FDA352,rgb(255, 69, 0));
+    background-image: -moz-linear-gradient(top,#FDA352,rgb(255, 69, 0));
+    background-image: -ms-linear-gradient(top,#FDA352,rgb(255, 69, 0));
+    background-image: -o-linear-gradient(top,#FDA352,rgb(255, 69, 0));
+    background-image: linear-gradient(top,#FDA352,rgb(255, 69, 0));
+    color:white;
+    border: 1px solid #FB8F3D;
+  }
+  
+  .key:hover {
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#FD934D),to(#F9760B));
+    background-image: -webkit-linear-gradient(top,#FD934D,#F9760B);
+    background-image: -moz-linear-gradient(top,#FD934D,#F9760B);
+    background-image: -ms-linear-gradient(top,#FD934D,#F9760B);
+    background-image: -o-linear-gradient(top,#FD934D,#F9760B);
+    background-image: linear-gradient(top,#FD934D,#F9760B);
+    border: 1px solid #EB5200;
+  }
+  
+  .key:active {
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#ff6905),to(#f06e04));
+    background-image: -webkit-linear-gradient(top,#ff6905,#f06e04);
+    background-image: -moz-linear-gradient(top,#ff6905,#f06e04);
+    background-image: -ms-linear-gradient(top,#ff6905,#f06e04);
+    background-image: -o-linear-gradient(top,#ff6905,#f06e04);
+    background-image: linear-gradient(top,#ff6905,#f06e04);
+    border: 1px solid #EB5200;
+  }
+  
+  .key:focus {
+    outline: thin dotted;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+    border-color: transparent;
+    box-shadow: none;
+  }
+  
+  .numberKey { 
+    width: 50px;
+    height: 50px;
+    font-size: 20pt;
+    font-weight: 600;
+  }
+  
+  .submitKey {
+    /*text-orientation: sideways;*/
+    height: 175px;
+  }
+  
+  .resetKey {
+    width: 50px;
+    height: 50px;
+  }
