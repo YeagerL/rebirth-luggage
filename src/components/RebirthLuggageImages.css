@@ -1,0 +1,91 @@
+.rebirthLuggageImages {
+    background-color: black;
+}
+
+.keyCodeInput {
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
+    font-size: 60px;
+}
+
+.keyCodeInput input {
+    width:100px;
+    font-size: 60px;
+    text-align: center;
+}
+
+.keyCodeInput button {
+    margin-left:50px;
+    font-size: 60px;
+    border: 3px solid rgb(255, 69, 0);
+    border-radius: 8px;
+    color: rgb(255, 69, 0);
+    cursor: pointer;
+  
+    background-image: -webkit-gradient(linear,left top,left bottom,from(), to(rgb(255, 69, 0)));
+    background-image: -webkit-linear-gradient(top,#FDA352,rgb(255, 69, 0));
+    background-image: -moz-linear-gradient(top,#FDA352,rgb(255, 69, 0));
+    background-image: -ms-linear-gradient(top,#FDA352,rgb(255, 69, 0));
+    background-image: -o-linear-gradient(top,#FDA352,rgb(255, 69, 0));
+    background-image: linear-gradient(top,#FDA352,rgb(255, 69, 0));
+    color:white;
+    border: 1px solid #FB8F3D;
+  }
+  
+  .keyCodeInput button:hover {
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#FD934D),to(#F9760B));
+    background-image: -webkit-linear-gradient(top,#FD934D,#F9760B);
+    background-image: -moz-linear-gradient(top,#FD934D,#F9760B);
+    background-image: -ms-linear-gradient(top,#FD934D,#F9760B);
+    background-image: -o-linear-gradient(top,#FD934D,#F9760B);
+    background-image: linear-gradient(top,#FD934D,#F9760B);
+    border: 1px solid #EB5200;
+  }
+  
+  .keyCodeInput button:active {
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#ff6905),to(#f06e04));
+    background-image: -webkit-linear-gradient(top,#ff6905,#f06e04);
+    background-image: -moz-linear-gradient(top,#ff6905,#f06e04);
+    background-image: -ms-linear-gradient(top,#ff6905,#f06e04);
+    background-image: -o-linear-gradient(top,#ff6905,#f06e04);
+    background-image: linear-gradient(top,#ff6905,#f06e04);
+    border: 1px solid #EB5200;
+  }
+  
+  .keyCodeInput button:focus {
+    outline: thin dotted;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+    border-color: transparent;
+    box-shadow: none;
+  }
+
+.imagesTable {
+    width:50%;
+}
+
+.rebirthImages {
+    width:min-content;
+}
+
+#rebirthImages > .img:hover {
+    border:3px solid grey;
+}
+
+
+.locationImages {
+    width: min-content;
+    position: relative;
+    float: right;
+}
+
+.locationImages > div {
+    width: min-content;
+}
+
+.locationImage {
+    width: 500px;
+}
+
+.label-text {
+    font-size: 
+}
