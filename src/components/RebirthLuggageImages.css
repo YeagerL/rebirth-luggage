@@ -3,19 +3,24 @@
 }
 
 .keyCodeInput {
-    font-family: "Roboto", Arial, Helvetica, sans-serif;
+    font-family: "ModernWarfare", Arial, Helvetica, sans-serif;
     font-size: 60px;
 }
 
 .keyCodeInput input {
-    width:100px;
-    font-size: 60px;
+    width:120px;
+    font-family: "ModernWarfare", Arial, Helvetica, sans-serif;
+    color: rgb(255, 69, 0);
+    border-radius: 2px;
+    font-size: 45px;
     text-align: center;
 }
 
 .keyCodeInput button {
+    font-family: "ModernWarfare", Arial, Helvetica, sans-serif;
+
     margin-left:50px;
-    font-size: 60px;
+    font-size: 45px;
     border: 3px solid rgb(255, 69, 0);
     border-radius: 8px;
     color: rgb(255, 69, 0);
@@ -67,10 +72,9 @@
     width:min-content;
 }
 
-#rebirthImages > .img:hover {
-    border:3px solid grey;
+.selected {
+    border: thick solid white;
 }
-
 
 .locationImages {
     width: min-content;
@@ -82,10 +86,46 @@
     width: min-content;
 }
 
-.locationImage {
-    width: 500px;
+.locationImages h3 {
+    margin-top:0px;
+    font-family: Arial;
 }
 
-.label-text {
-    font-size: 
+.locationImage {
+    width: 380px;
+}
+
+.input-container{
+	position:relative;
+	margin-bottom:25px;
+}
+.input-container label{
+	position:absolute;
+	top:0px;
+	left:0px;
+	font-size:16px;
+	/*color:#fff;	*/
+    /*pointer-event:none;*/
+	transition: all 0.5s ease-in-out;
+}
+.input-container input{ 
+  border:0;
+  border-bottom:1px solid #555;  
+  background:transparent;
+  /*width:100%;*/
+  padding:8px 0 5px 0;
+  font-size:60px;
+  color:#fff;
+}
+.input-container input:focus{ 
+ border:none;	
+ outline:none;
+ border-bottom:1px solid #e74c3c;	
+}
+
+.input-container input:focus ~ label,
+.input-container input:valid ~ label{
+	top:-12px;
+	font-size:12px;
+	
 }
