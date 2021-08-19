@@ -1,25 +1,30 @@
 <template id="RebirthLuggageImages">
     <div class="rebirthLuggageImages">
         <div class="keyCodeInput">
-            <input type="tel" v-model="keyCode1" @focus="$event.target.select()" @input="numberOnly($event);" maxlength="3" /><span class="label-text">-</span>
-            <input type="tel" v-model="keyCode2" @focus="$event.target.select()" @input="numberOnly($event);" maxlength="2" /><span class="label-text">-</span>
-            <input type="tel" v-model="keyCode3" @focus="$event.target.select()" @input="numberOnly($event);" maxlength="3" />
-            <button @click='resetKeyCode'>Reset Code</button>
-            <button @click='reset'>Reset All</button>
+            <div class="input-container">
+                <input type="tel" v-model="keyCode1" @focus="$event.target.select()" @input="numberOnly($event)" numberOnlymaxlength="3" /><span class="label-text">-</span>
+                <input type="tel" v-model="keyCode2" @focus="$event.target.select()" @input="numberOnly($event)" maxlength="2" /><span class="label-text">-</span>
+                <input type="tel" v-model="keyCode3" @focus="$event.target.select()" @input="numberOnly($event)" maxlength="3" />
+            </div>
+
+            <div>
+                <button @click="resetKeyCode()">Reset Code</button>
+                <button @click="reset()">Reset All</button>
+            </div>
         </div>
 
         <div>
             <div v-if="true" id="locationImages" class="locationImages">
                 <div v-if="displayLocationImage1" id="locationImagePosition1">
-                    <img class="locationImage" :src="locationImage1" @click="selectPosition(1)" alt="" />
+                    <img class="locationImage" v-bind:class="{ selected: isSelectedImagePosition('1')}" :src="locationImage1" @click="selectPosition('1')" alt="" />
                     <h3>{{ locationImage1.toString().substring(48, locationImage1.length - 4) }}</h3>
                 </div>
                 <div v-if="displayLocationImage2" id="locationImagePosition2">
-                    <img class="locationImage" :src="locationImage2" @click="selectPosition(2)" alt="" />
+                    <img class="locationImage" v-bind:class="{ selected: isSelectedImagePosition('2') }" :src="locationImage2" @click="selectPosition('2')" alt="" />
                     <h3>{{ locationImage2.toString().substring(48, locationImage2.length - 4) }}</h3>
                 </div>
                 <div v-if="displayLocationImage3" id="locationImagePosition3">
-                    <img class="locationImage" :src="locationImage3" @click="selectPosition(3)" alt="" />
+                    <img class="locationImage" v-bind:class="{ selected: isSelectedImagePosition('3') }" :src="locationImage3" @click="selectPosition('3')" alt="" />
                     <h3>{{ locationImage3.toString().substring(48, locationImage3.length - 4) }}</h3>
                 </div>
             </div>
@@ -28,50 +33,40 @@
                 <table class="rebirthImages">
                     <tbody>
                         <tr>
-                            <td><img @click="onClick('1')" src="./rebirthLuggageImages/Image-1.png" width="219" height="128" alt="" /></td>
-                            <td><img @click="onClick('8')" src="./rebirthLuggageImages/Image-8.png" width="208" height="128" alt="" /></td>
-                            <td><img @click="onClick('15')" src="./rebirthLuggageImages/Image-15.png" width="229" height="145" alt="" /></td>
-                            <td><img @click="onClick('22')" src="./rebirthLuggageImages/Image-22.png" width="232" height="147" alt="" /></td>
-                            <td><img @click="onClick('25')" src="./rebirthLuggageImages/Image-25.png" width="248" height="162" alt="" /></td>
+                            <td><img v-bind:class="{ selected : isSelected('1') }" @click="onClick('1')" src="./rebirthLuggageImages/Image-1.png" width="219" height="128" alt="" /></td>
+                            <td><img v-bind:class="{ selected : isSelected('6') }" @click="onClick('6')" src="./rebirthLuggageImages/Image-6.png" alt="" /></td>
+                            <td><img v-bind:class="{ selected : isSelected('11') }" @click="onClick('11')" src="./rebirthLuggageImages/Image-11.png" alt="" /></td>
+                            <td><img v-bind:class="{ selected : isSelected('16') }" @click="onClick('16')" src="./rebirthLuggageImages/Image-16.png" alt="" /></td>
+                            <td><img v-bind:class="{ selected : isSelected('22') }" @click="onClick('22')" src="./rebirthLuggageImages/Image-22.png" width="232" height="147" alt="" /></td>
                         </tr>
                         <tr>
-                            <td><img @click="onClick('2')" src="./rebirthLuggageImages/Image-2.png" width="224" height="135" alt="" /></td>
-                            <td><img @click="onClick('9')" src="./rebirthLuggageImages/Image-9.png" alt="" /></td>
-                            <td><img @click="onClick('16')" src="./rebirthLuggageImages/Image-16.png" alt="" /></td>
-                            <td><img @click="onClick('23')" src="./rebirthLuggageImages/Image-23.png" alt="" /></td>
+                            <td><img v-bind:class="{ selected : isSelected('2') }" @click="onClick('2')" src="./rebirthLuggageImages/Image-2.png" width="224" height="135" alt="" /></td>
+                            <td><img v-bind:class="{ selected : isSelected('7') }" @click="onClick('7')" src="./rebirthLuggageImages/Image-7.png" alt="" /></td>
+                            <td><img v-bind:class="{ selected : isSelected('12') }" @click="onClick('12')" src="./rebirthLuggageImages/Image-12.png" alt="" /></td>
+                            <td><img v-bind:class="{ selected : isSelected('17') }" @click="onClick('17')" src="./rebirthLuggageImages/Image-17.png" alt="" /></td>
+
+                            <td><img v-bind:class="{ selected : isSelected('23') }" @click="onClick('23')" src="./rebirthLuggageImages/Image-23.png" alt="" /></td>
                         </tr>
                         <tr>
-                            <td><img @click="onClick('3')" src="./rebirthLuggageImages/Image-3.png" alt="" /></td>
-                            <td><img @click="onClick('10')" src="./rebirthLuggageImages/Image-10.png" alt="" /></td>
-                            <td><img @click="onClick('17')" src="./rebirthLuggageImages/Image-17.png" alt="" /></td>
-                            <td><img @click="onClick('24')" src="./rebirthLuggageImages/Image-24.png" alt="" /></td>
-                            <td></td>
+                            <td><img v-bind:class="{selected : isSelected('3') }" @click="onClick('3')" src="./rebirthLuggageImages/Image-3.png" alt="" /></td>
+                            <td><img v-bind:class="{selected : isSelected('8') }" @click="onClick('8')" src="./rebirthLuggageImages/Image-8.png" width="208" height="128" alt="" /></td>
+                            <td><img v-bind:class="{selected : isSelected('13') }" @click="onClick('13')" src="./rebirthLuggageImages/Image-13.png" alt="" /></td>
+                            <td><img v-bind:class="{selected : isSelected('18') }" @click="onClick('18')" src="./rebirthLuggageImages/Image-18.png" alt="" /></td>
+                            
+                            <td><img v-bind:class="{selected : isSelected('24') }" @click="onClick('24')" src="./rebirthLuggageImages/Image-24.png" alt="" /></td>
                         </tr>
                         <tr>
-                            <td><img @click="onClick('4')" src="./rebirthLuggageImages/Image-4.png" alt="" /></td>
-                            <td><img @click="onClick('11')" src="./rebirthLuggageImages/Image-11.png" alt="" /></td>
-                            <td><img @click="onClick('18')" src="./rebirthLuggageImages/Image-18.png" alt="" /></td>
-                            <td></td>
-                            <td></td>
+                            <td><img v-bind:class="{selected : isSelected('4') }" @click="onClick('4')" src="./rebirthLuggageImages/Image-4.png" alt="" /></td>
+                            <td><img v-bind:class="{selected : isSelected('9') }" @click="onClick('9')" src="./rebirthLuggageImages/Image-9.png" alt="" /></td>
+                            <td><img v-bind:class="{selected : isSelected('14') }" @click="onClick('14')" src="./rebirthLuggageImages/Image-14.png" alt="" /></td>
+                            <td><img v-bind:class="{selected : isSelected('19') }" @click="onClick('19')" src="./rebirthLuggageImages/Image-19.png" alt="" /></td>
+                            <td><img v-bind:class="{selected : isSelected('25') }" @click="onClick('25')" src="./rebirthLuggageImages/Image-25.png" width="248" height="162" alt="" /></td>
                         </tr>
                         <tr>
-                            <td><img @click="onClick('5')" src="./rebirthLuggageImages/Image-5.png" alt="" /></td>
-                            <td><img @click="onClick('12')" src="./rebirthLuggageImages/Image-12.png" alt="" /></td>
-                            <td><img @click="onClick('19')" src="./rebirthLuggageImages/Image-19.png" alt="" /></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><img @click="onClick('6')" src="./rebirthLuggageImages/Image-6.png" alt="" /></td>
-                            <td><img @click="onClick('13')" src="./rebirthLuggageImages/Image-13.png" alt="" /></td>
-                            <td><img @click="onClick('20')" src="./rebirthLuggageImages/Image-20.png" alt="" /></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><img @click="onClick('7')" src="./rebirthLuggageImages/Image-7.png" alt="" /></td>
-                            <td><img @click="onClick('14')" src="./rebirthLuggageImages/Image-14.png" alt="" /></td>
-                            <td></td>
+                            <td><img v-bind:class="{selected : isSelected('5') }" @click="onClick('5')" src="./rebirthLuggageImages/Image-5.png" alt="" /></td>
+                            <td><img v-bind:class="{selected : isSelected('10') }" @click="onClick('10')" src="./rebirthLuggageImages/Image-10.png" alt="" /></td>
+                            <td><img v-bind:class="{selected : isSelected('15') }" @click="onClick('15')" src="./rebirthLuggageImages/Image-15.png" width="229" height="145" alt="" /></td>
+                            <td><img v-bind:class="{selected : isSelected('20') }" @click="onClick('20')" src="./rebirthLuggageImages/Image-20.png" alt="" /></td>
                             <td></td>
                         </tr>
                     </tbody>
@@ -110,7 +105,7 @@ displayLocationImage3.value = false
 //const locationImage2Open = locationImage2.value === undefined || locationImage2.value.length === 0
 //const displayLocationImage2 = locationImage2.value !== undefined && locationImage2.value.length > 0
 
-let selectedPosition = null;
+let selectedPosition = null
 
 let locationImage1Open = true
 let locationImage2Open = true
@@ -121,12 +116,20 @@ let selectedImages = []
     const onClick = (imageNumber) => {
 
         let currentlySelectedImages;
-        if (selectedPosition !== null && selectedImages.filter(x => x === imageNumber).length > 0) {
-            currentlySelectedImages = selectedImages.filter(x => { x !== imageNumber });
+        if (selectedImages.filter(x => x.id === imageNumber).length > 0) {
+            currentlySelectedImages = selectedImages.filter(x => { x.id !== imageNumber });
+        } 
+        else {
+            currentlySelectedImages = selectedImages
         }
 
+        // no position is selected and all three image positions are filled
+        if (selectedPosition === null && !locationImage1Open && !locationImage2Open && !locationImage3Open) {
+            return
+            // selectedPosition = 3
+        }
 
-        if (selectedPosition !== null || (selectedPosition === null && (selectedImages.filter(x => x === imageNumber)).length === 0)) {
+        //if (selectedPosition !== null || (selectedPosition === null && selectedImages.filter(x => x.id === imageNumber)).length === 0) {
             let locationImage = ''
             switch(imageNumber) {
                 case "1": 
@@ -211,11 +214,15 @@ let selectedImages = []
                     locationImage = ''
             }
 
-            
+            //if (selectedPosition === null && (locationImage1Open || locationImage2Open || locationImage3Open)) {
+                selectedImages = [];
+                selectedImages.push({ "id": imageNumber, "value": locationImage });
 
-            if (selectedPosition === null && (locationImage1Open || locationImage2Open || locationImage3Open)) {
-                selectedImages.push(imageNumber);
-            }
+                if (currentlySelectedImages != undefined && currentlySelectedImages.length > 0) {
+                    currentlySelectedImages.forEach(x => { selectedImages.push(x) });
+                }
+                
+            //}
 
             if (selectedPosition === 1 || selectedPosition === null && locationImage1Open) {
                 locationImage1.value = locationImage
@@ -230,16 +237,32 @@ let selectedImages = []
                 displayLocationImage3.value = true
                 locationImage3Open = false
             }
+
+
         
             selectedPosition = null;
-        }
+        //}
         
     };
 
     const selectPosition = (position) => {
         debugger
         selectedPosition = position
-    };
+    }
+    
+    const isSelected = (imageNumber) => {
+        if (selectedImages.length != 0) {
+            return selectedImages.filter(x => x.id === imageNumber) != 0
+        }
+        return false
+    }
+
+    const isSelectedImagePosition = (imagePosition) => {
+        if (selectedPosition != null) {
+            return imagePosition === selectedPosition
+        }
+        return false
+    }
 
     const reset = () => {
         selectedPosition = null
@@ -255,6 +278,8 @@ let selectedImages = []
         displayLocationImage2 = false
         displayLocationImage3 = false
 
+        selectedImages = []
+
         resetKeyCode()
     };
 
@@ -265,9 +290,14 @@ let selectedImages = []
     }
 
     const numberOnly = (event) => {
-        // This removes any other character but numbers as entered by user
         event.target.value = event.target.value.replace(/[^0-9]/gi, "")
     }
 
+    const arrow = (event) => {
+        debugger
+        if (event.key === "ArrowRight") {
+            
+        }
+    }
 
 </script>
