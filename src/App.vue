@@ -9,7 +9,7 @@
 <script setup>
 //import HelloWorld from './components/HelloWorld.vue'
 import KeyPad from './components/KeyPad.vue'
-import RebirthLuggage from './components/RebirthLuggage.vue'
+// import RebirthLuggage from './components/RebirthLuggage.vue'
 import RebirthLuggageImages from './components/RebirthLuggageImages.vue'
 
 // This starter template is using Vue 3 experimental <script setup> SFCs

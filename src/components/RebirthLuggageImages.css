@@ -9,7 +9,7 @@
 
 .keyCodeInput input {
     width:120px;
-    font-family: "ModernWarfare", Arial, Helvetica, sans-serif;
+    font-family: /* "ModernWarfare", */ Arial, Helvetica, sans-serif;
     color: rgb(255, 69, 0);
     border-radius: 2px;
     font-size: 45px;
