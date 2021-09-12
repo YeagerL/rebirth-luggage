@@ -1,75 +1,14 @@
 .rebirthLuggageImages {
+    background-size: 100%;
     background-color: black;
 }
 
-.keyCodeInput {
-    font-family: "ModernWarfare", Arial, Helvetica, sans-serif;
-    font-size: 60px;
+.rebirth-images td {
+    max-width: 20%;
 }
 
-.keyCodeInput input {
-    width:120px;
-    font-family: /* "ModernWarfare", */ Arial, Helvetica, sans-serif;
-    color: rgb(255, 69, 0);
-    border-radius: 2px;
-    font-size: 45px;
-    text-align: center;
-}
-
-.keyCodeInput button {
-    font-family: "ModernWarfare", Arial, Helvetica, sans-serif;
-
-    margin-left:50px;
-    font-size: 45px;
-    border: 3px solid rgb(255, 69, 0);
-    border-radius: 8px;
-    color: rgb(255, 69, 0);
-    cursor: pointer;
-  
-    background-image: -webkit-gradient(linear,left top,left bottom,from(), to(rgb(255, 69, 0)));
-    background-image: -webkit-linear-gradient(top,#FDA352,rgb(255, 69, 0));
-    background-image: -moz-linear-gradient(top,#FDA352,rgb(255, 69, 0));
-    background-image: -ms-linear-gradient(top,#FDA352,rgb(255, 69, 0));
-    background-image: -o-linear-gradient(top,#FDA352,rgb(255, 69, 0));
-    background-image: linear-gradient(top,#FDA352,rgb(255, 69, 0));
-    color:white;
-    border: 1px solid #FB8F3D;
-  }
-  
-  .keyCodeInput button:hover {
-    background-image: -webkit-gradient(linear,left top,left bottom,from(#FD934D),to(#F9760B));
-    background-image: -webkit-linear-gradient(top,#FD934D,#F9760B);
-    background-image: -moz-linear-gradient(top,#FD934D,#F9760B);
-    background-image: -ms-linear-gradient(top,#FD934D,#F9760B);
-    background-image: -o-linear-gradient(top,#FD934D,#F9760B);
-    background-image: linear-gradient(top,#FD934D,#F9760B);
-    border: 1px solid #EB5200;
-  }
-  
-  .keyCodeInput button:active {
-    background-image: -webkit-gradient(linear,left top,left bottom,from(#ff6905),to(#f06e04));
-    background-image: -webkit-linear-gradient(top,#ff6905,#f06e04);
-    background-image: -moz-linear-gradient(top,#ff6905,#f06e04);
-    background-image: -ms-linear-gradient(top,#ff6905,#f06e04);
-    background-image: -o-linear-gradient(top,#ff6905,#f06e04);
-    background-image: linear-gradient(top,#ff6905,#f06e04);
-    border: 1px solid #EB5200;
-  }
-  
-  .keyCodeInput button:focus {
-    outline: thin dotted;
-    outline: 5px auto -webkit-focus-ring-color;
-    outline-offset: -2px;
-    border-color: transparent;
-    box-shadow: none;
-  }
-
-.imagesTable {
-    width:50%;
-}
-
-.rebirthImages {
-    width:min-content;
+.rebirth-images img {
+    max-width: 100%;
 }
 
 .selected {
@@ -77,9 +16,10 @@
 }
 
 .locationImages {
-    width: min-content;
+    /* width: min-content; */
     position: relative;
     float: right;
+    width: auto;
 }
 
 .locationImages > div {
@@ -92,14 +32,18 @@
 }
 
 .locationImage {
-    width: 380px;
+    /* width: 380px; */
+    width: 180px;
 }
 
-.input-container{
-	position:relative;
+.keyCodeInput {
+    position:relative;
 	margin-bottom:25px;
+    font-family: "ModernWarfare", Arial, Helvetica, sans-serif;
+    font-size: 60px;
 }
-.input-container label{
+
+.keyCodeInput label{
 	position:absolute;
 	top:0px;
 	left:0px;
@@ -108,24 +52,30 @@
     /*pointer-event:none;*/
 	transition: all 0.5s ease-in-out;
 }
-.input-container input{ 
-  border:0;
-  border-bottom:1px solid #555;  
-  background:transparent;
-  /*width:100%;*/
-  padding:8px 0 5px 0;
-  font-size:60px;
-  color:#fff;
+
+.keyCodeInput input {
+    background:transparent;
+    border:0;
+    border-bottom:1px solid #555;
+    border-radius: 2px;
+    /* color:#fff; */
+    color: rgb(255, 69, 0);
+    /*width:100%;*/
+    width:120px;
+    padding:8px 0 5px 0;
+    font-family: /* "ModernWarfare", */ Arial, Helvetica, sans-serif;
+    font-size: 45px;
+    text-align: center;
 }
-.input-container input:focus{ 
+
+.keyCodeInput input:focus{ 
  border:none;	
  outline:none;
  border-bottom:1px solid #e74c3c;	
 }
 
-.input-container input:focus ~ label,
-.input-container input:valid ~ label{
+.keyCodeInput input:focus ~ label,
+.keyCodeInput input:valid ~ label{
 	top:-12px;
 	font-size:12px;
-	
 }

@@ -15,12 +15,45 @@
   }
   
   .keyCode {
-    padding-top: 5px;
-    font-size: 24pt;
     color: orangered;
+    position: relative;
+    padding-top: 5px;
+    margin-bottom: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16pt;
     letter-spacing: 6px;
     vertical-align: text-bottom;
   }
+
+  #keyCode2 {
+    width: 60px;
+  }
+
+  .keyCode input {
+    background: transparent;
+    border: 0;
+    border-bottom:1px solid #555;
+    border-radius: 2px;
+    padding: 8px 0 5px 0;
+    /* color:#fff; */
+    color: rgb(255, 69, 0);
+    /*width:100%;*/
+    width:80px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16pt;
+    text-align: center;
+  }
+  .keyCode input:focus{ 
+    border:none;	
+    outline:none;
+    border-bottom:1px solid #e74c3c;	
+   }
+   
+   .keyCode input:focus ~ label,
+   .keyCode input:valid ~ label{
+     top:-12px;
+     font-size:12px; 
+   }
   
   .keyboard{
     padding-left:15px;
@@ -28,19 +61,18 @@
   }
   
   .key {
-    border: 3px solid rgb(255, 69, 0);
-    border-radius: 8px;
-    color: rgb(255, 69, 0);
-    cursor: pointer;
-  
     background-image: -webkit-gradient(linear,left top,left bottom,from(), to(rgb(255, 69, 0)));
     background-image: -webkit-linear-gradient(top,#FDA352,rgb(255, 69, 0));
     background-image: -moz-linear-gradient(top,#FDA352,rgb(255, 69, 0));
     background-image: -ms-linear-gradient(top,#FDA352,rgb(255, 69, 0));
     background-image: -o-linear-gradient(top,#FDA352,rgb(255, 69, 0));
     background-image: linear-gradient(top,#FDA352,rgb(255, 69, 0));
-    color:white;
+
     border: 1px solid #FB8F3D;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    width: 50px;
   }
   
   .key:hover {
@@ -82,8 +114,13 @@
     /*text-orientation: sideways;*/
     height: 175px;
   }
+
+  .back-key {
+    font-size: 10pt;
+    height: 50px;
+  }
   
   .resetKey {
     width: 50px;
-    height: 50px;
+    height: 100px;
   }

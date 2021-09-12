@@ -1,8 +1,8 @@
 <template id="RebirthLuggageImages">
     <div class="rebirthLuggageImages">
         <div class="keyCodeInput">
-            <div class="input-container">
-                <input type="tel" v-model="keyCode1" @focus="$event.target.select()" @input="numberOnly($event)" numberOnlymaxlength="3" /><span class="label-text">-</span>
+            <div>
+                <input type="tel" v-model="keyCode1" @focus="$event.target.select()" @input="numberOnly($event)" maxlength="3" /><span class="label-text">-</span>
                 <input type="tel" v-model="keyCode2" @focus="$event.target.select()" @input="numberOnly($event)" maxlength="2" /><span class="label-text">-</span>
                 <input type="tel" v-model="keyCode3" @focus="$event.target.select()" @input="numberOnly($event)" maxlength="3" />
             </div>
@@ -14,7 +14,11 @@
         </div>
 
         <div>
-            <div v-if="true" id="locationImages" class="locationImages">
+              <KeyPad />
+        </div>
+
+        <div>
+            <div id="locationImages" class="locationImages">
                 <div v-if="displayLocationImage1" id="locationImagePosition1">
                     <img class="locationImage" v-bind:class="{ selected: isSelectedImagePosition('1')}" :src="locationImage1" @click="selectPosition('1')" alt="" />
                     <h3>{{ locationImage1.toString().substring(48, locationImage1.length - 4) }}</h3>
@@ -30,43 +34,43 @@
             </div>
 
             <div>
-                <table class="rebirthImages">
+                <table class="rebirth-images">
                     <tbody>
                         <tr>
-                            <td><img v-bind:class="{ selected : isSelected('1') }" @click="onClick('1')" src="./rebirthLuggageImages/Image-1.png" width="219" height="128" alt="" /></td>
-                            <td><img v-bind:class="{ selected : isSelected('6') }" @click="onClick('6')" src="./rebirthLuggageImages/Image-6.png" alt="" /></td>
-                            <td><img v-bind:class="{ selected : isSelected('11') }" @click="onClick('11')" src="./rebirthLuggageImages/Image-11.png" alt="" /></td>
-                            <td><img v-bind:class="{ selected : isSelected('16') }" @click="onClick('16')" src="./rebirthLuggageImages/Image-16.png" alt="" /></td>
-                            <td><img v-bind:class="{ selected : isSelected('22') }" @click="onClick('22')" src="./rebirthLuggageImages/Image-22.png" width="232" height="147" alt="" /></td>
+                            <td><img v-bind:class="{ selected : isSelected('1') }" @click="onClick('1')" src="./rebirthLuggageImages/Image-1.png" alt="" max-height="100%" max-width="100%" /></td>
+                            <td><img v-bind:class="{ selected : isSelected('6') }" @click="onClick('6')" src="./rebirthLuggageImages/Image-6.png" alt="" max-height="100%" max-width="100%" /></td>
+                            <td><img v-bind:class="{ selected : isSelected('11') }" @click="onClick('11')" src="./rebirthLuggageImages/Image-11.png" alt="" max-height="100%" max-width="100%" /></td>
+                            <td><img v-bind:class="{ selected : isSelected('16') }" @click="onClick('16')" src="./rebirthLuggageImages/Image-16.png" alt="" max-height="100%" max-width="100%" /></td>
+                            <td><img v-bind:class="{ selected : isSelected('22') }" @click="onClick('22')" src="./rebirthLuggageImages/Image-22.png" alt="" max-height="100%" max-width="100%" /></td>
                         </tr>
                         <tr>
-                            <td><img v-bind:class="{ selected : isSelected('2') }" @click="onClick('2')" src="./rebirthLuggageImages/Image-2.png" width="224" height="135" alt="" /></td>
-                            <td><img v-bind:class="{ selected : isSelected('7') }" @click="onClick('7')" src="./rebirthLuggageImages/Image-7.png" alt="" /></td>
-                            <td><img v-bind:class="{ selected : isSelected('12') }" @click="onClick('12')" src="./rebirthLuggageImages/Image-12.png" alt="" /></td>
-                            <td><img v-bind:class="{ selected : isSelected('17') }" @click="onClick('17')" src="./rebirthLuggageImages/Image-17.png" alt="" /></td>
+                            <td><img v-bind:class="{ selected : isSelected('2') }" @click="onClick('2')" src="./rebirthLuggageImages/Image-2.png" alt="" max-height="100%" max-width="100%" /></td>
+                            <td><img v-bind:class="{ selected : isSelected('7') }" @click="onClick('7')" src="./rebirthLuggageImages/Image-7.png" alt="" max-height="100%" max-width="100%" /></td>
+                            <td><img v-bind:class="{ selected : isSelected('12') }" @click="onClick('12')" src="./rebirthLuggageImages/Image-12.png" alt="" max-height="100%" max-width="100%" /></td>
+                            <td><img v-bind:class="{ selected : isSelected('17') }" @click="onClick('17')" src="./rebirthLuggageImages/Image-17.png" alt="" max-height="100%" max-width="100%" /></td>
 
-                            <td><img v-bind:class="{ selected : isSelected('23') }" @click="onClick('23')" src="./rebirthLuggageImages/Image-23.png" alt="" /></td>
+                            <td><img v-bind:class="{ selected : isSelected('23') }" @click="onClick('23')" src="./rebirthLuggageImages/Image-23.png" alt="" max-height="100%" max-width="100%" /></td>
                         </tr>
                         <tr>
-                            <td><img v-bind:class="{selected : isSelected('3') }" @click="onClick('3')" src="./rebirthLuggageImages/Image-3.png" alt="" /></td>
-                            <td><img v-bind:class="{selected : isSelected('8') }" @click="onClick('8')" src="./rebirthLuggageImages/Image-8.png" width="208" height="128" alt="" /></td>
-                            <td><img v-bind:class="{selected : isSelected('13') }" @click="onClick('13')" src="./rebirthLuggageImages/Image-13.png" alt="" /></td>
-                            <td><img v-bind:class="{selected : isSelected('18') }" @click="onClick('18')" src="./rebirthLuggageImages/Image-18.png" alt="" /></td>
+                            <td><img v-bind:class="{selected : isSelected('3') }" @click="onClick('3')" src="./rebirthLuggageImages/Image-3.png" alt="" max-height="100%" max-width="100%" /></td>
+                            <td><img v-bind:class="{selected : isSelected('8') }" @click="onClick('8')" src="./rebirthLuggageImages/Image-8.png" alt="" max-height="100%" max-width="100%" /></td>
+                            <td><img v-bind:class="{selected : isSelected('13') }" @click="onClick('13')" src="./rebirthLuggageImages/Image-13.png" alt="" max-height="100%" max-width="100%" /></td>
+                            <td><img v-bind:class="{selected : isSelected('18') }" @click="onClick('18')" src="./rebirthLuggageImages/Image-18.png" alt="" max-height="100%" max-width="100%" /></td>
                             
-                            <td><img v-bind:class="{selected : isSelected('24') }" @click="onClick('24')" src="./rebirthLuggageImages/Image-24.png" alt="" /></td>
+                            <td><img v-bind:class="{selected : isSelected('24') }" @click="onClick('24')" src="./rebirthLuggageImages/Image-24.png" alt="" max-height="100%" max-width="100%" /></td>
                         </tr>
                         <tr>
-                            <td><img v-bind:class="{selected : isSelected('4') }" @click="onClick('4')" src="./rebirthLuggageImages/Image-4.png" alt="" /></td>
-                            <td><img v-bind:class="{selected : isSelected('9') }" @click="onClick('9')" src="./rebirthLuggageImages/Image-9.png" alt="" /></td>
-                            <td><img v-bind:class="{selected : isSelected('14') }" @click="onClick('14')" src="./rebirthLuggageImages/Image-14.png" alt="" /></td>
-                            <td><img v-bind:class="{selected : isSelected('19') }" @click="onClick('19')" src="./rebirthLuggageImages/Image-19.png" alt="" /></td>
-                            <td><img v-bind:class="{selected : isSelected('25') }" @click="onClick('25')" src="./rebirthLuggageImages/Image-25.png" width="248" height="162" alt="" /></td>
+                            <td><img v-bind:class="{selected : isSelected('4') }" @click="onClick('4')" src="./rebirthLuggageImages/Image-4.png" alt="" max-height="100%" max-width="100%" /></td>
+                            <td><img v-bind:class="{selected : isSelected('9') }" @click="onClick('9')" src="./rebirthLuggageImages/Image-9.png" alt="" max-height="100%" max-width="100%" /></td>
+                            <td><img v-bind:class="{selected : isSelected('14') }" @click="onClick('14')" src="./rebirthLuggageImages/Image-14.png" alt="" max-height="100%" max-width="100%" /></td>
+                            <td><img v-bind:class="{selected : isSelected('19') }" @click="onClick('19')" src="./rebirthLuggageImages/Image-19.png" alt="" max-height="100%" max-width="100%" /></td>
+                            <td><img v-bind:class="{selected : isSelected('25') }" @click="onClick('25')" src="./rebirthLuggageImages/Image-25.png" alt="" max-height="100%" max-width="100%" /></td>
                         </tr>
                         <tr>
-                            <td><img v-bind:class="{selected : isSelected('5') }" @click="onClick('5')" src="./rebirthLuggageImages/Image-5.png" alt="" /></td>
-                            <td><img v-bind:class="{selected : isSelected('10') }" @click="onClick('10')" src="./rebirthLuggageImages/Image-10.png" alt="" /></td>
-                            <td><img v-bind:class="{selected : isSelected('15') }" @click="onClick('15')" src="./rebirthLuggageImages/Image-15.png" width="229" height="145" alt="" /></td>
-                            <td><img v-bind:class="{selected : isSelected('20') }" @click="onClick('20')" src="./rebirthLuggageImages/Image-20.png" alt="" /></td>
+                            <td><img v-bind:class="{selected : isSelected('5') }" @click="onClick('5')" src="./rebirthLuggageImages/Image-5.png" alt="" max-height="100%" max-width="100%" /></td>
+                            <td><img v-bind:class="{selected : isSelected('10') }" @click="onClick('10')" src="./rebirthLuggageImages/Image-10.png" alt="" max-height="100%" max-width="100%" /></td>
+                            <td><img v-bind:class="{selected : isSelected('15') }" @click="onClick('15')" src="./rebirthLuggageImages/Image-15.png" alt="" max-height="100%" max-width="100%" /></td>
+                            <td><img v-bind:class="{selected : isSelected('20') }" @click="onClick('20')" src="./rebirthLuggageImages/Image-20.png" alt="" max-height="100%" max-width="100%" /></td>
                             <td></td>
                         </tr>
                     </tbody>
@@ -79,9 +83,10 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref } from 'vue'
 import './RebirthLuggageImages.css'
 //import './RebirthLuggageImages.scss'
+import KeyPad from './KeyPad.vue'
 
 let keyCode1 = ref()
 let keyCode2 = ref()
@@ -117,7 +122,7 @@ let selectedImages = []
 
         let currentlySelectedImages;
         if (selectedImages.filter(x => x.id === imageNumber).length > 0) {
-            currentlySelectedImages = selectedImages.filter(x => { x.id !== imageNumber });
+            currentlySelectedImages = selectedImages.filter(x => { x.id !== imageNumber })
         } 
         else {
             currentlySelectedImages = selectedImages
@@ -237,8 +242,6 @@ let selectedImages = []
                 displayLocationImage3.value = true
                 locationImage3Open = false
             }
-
-
         
             selectedPosition = null;
         //}
