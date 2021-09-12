@@ -15,67 +15,37 @@
     border: thick solid white;
 }
 
-.locationImages {
+.location-images > div {
+    display: inline-block;
     /* width: min-content; */
-    position: relative;
-    float: right;
-    width: auto;
+    max-width: 30%;
+    vertical-align: top;
+    padding: 2px;
 }
 
-.locationImages > div {
-    width: min-content;
+.location-images > img {
+    /* width: min-content; */
+    max-width: 30%;
 }
 
-.locationImages h3 {
+.location-images h3 {
     margin-top:0px;
     font-family: Arial;
+    font-size: 10pt;
 }
 
-.locationImage {
-    /* width: 380px; */
-    width: 180px;
+.location-image {
+    max-width: 100%;
 }
 
 .keyCodeInput {
     position:relative;
-	margin-bottom:25px;
     font-family: "ModernWarfare", Arial, Helvetica, sans-serif;
     font-size: 60px;
+    height: 50px;
 }
 
-.keyCodeInput label{
-	position:absolute;
-	top:0px;
-	left:0px;
-	font-size:16px;
-	/*color:#fff;	*/
-    /*pointer-event:none;*/
-	transition: all 0.5s ease-in-out;
-}
-
-.keyCodeInput input {
-    background:transparent;
-    border:0;
-    border-bottom:1px solid #555;
-    border-radius: 2px;
-    /* color:#fff; */
-    color: rgb(255, 69, 0);
-    /*width:100%;*/
-    width:120px;
-    padding:8px 0 5px 0;
-    font-family: /* "ModernWarfare", */ Arial, Helvetica, sans-serif;
-    font-size: 45px;
-    text-align: center;
-}
-
-.keyCodeInput input:focus{ 
- border:none;	
- outline:none;
- border-bottom:1px solid #e74c3c;	
-}
-
-.keyCodeInput input:focus ~ label,
-.keyCodeInput input:valid ~ label{
-	top:-12px;
-	font-size:12px;
+.keyCodeInput button {
+    vertical-align: top;
+    margin-top: 20px;
 }

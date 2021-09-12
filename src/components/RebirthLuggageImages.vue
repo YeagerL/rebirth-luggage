@@ -2,33 +2,26 @@
     <div class="rebirthLuggageImages">
         <div class="keyCodeInput">
             <div>
-                <input type="tel" v-model="keyCode1" @focus="$event.target.select()" @input="numberOnly($event)" maxlength="3" /><span class="label-text">-</span>
-                <input type="tel" v-model="keyCode2" @focus="$event.target.select()" @input="numberOnly($event)" maxlength="2" /><span class="label-text">-</span>
-                <input type="tel" v-model="keyCode3" @focus="$event.target.select()" @input="numberOnly($event)" maxlength="3" />
-            </div>
-
-            <div>
-                <button @click="resetKeyCode()">Reset Code</button>
-                <button @click="reset()">Reset All</button>
+                <button @click="reset()">Reset Images</button>
             </div>
         </div>
 
-        <div>
+        <div id="key-pad">
               <KeyPad />
         </div>
 
         <div>
-            <div id="locationImages" class="locationImages">
+            <div id="locationImages" class="location-images">
                 <div v-if="displayLocationImage1" id="locationImagePosition1">
-                    <img class="locationImage" v-bind:class="{ selected: isSelectedImagePosition('1')}" :src="locationImage1" @click="selectPosition('1')" alt="" />
+                    <img class="location-image" v-bind:class="{ selected: isSelectedImagePosition('1')}" :src="locationImage1" @click="selectPosition('1')" alt="" />
                     <h3>{{ locationImage1.toString().substring(48, locationImage1.length - 4) }}</h3>
                 </div>
                 <div v-if="displayLocationImage2" id="locationImagePosition2">
-                    <img class="locationImage" v-bind:class="{ selected: isSelectedImagePosition('2') }" :src="locationImage2" @click="selectPosition('2')" alt="" />
+                    <img class="location-image" v-bind:class="{ selected: isSelectedImagePosition('2') }" :src="locationImage2" @click="selectPosition('2')" alt="" />
                     <h3>{{ locationImage2.toString().substring(48, locationImage2.length - 4) }}</h3>
                 </div>
                 <div v-if="displayLocationImage3" id="locationImagePosition3">
-                    <img class="locationImage" v-bind:class="{ selected: isSelectedImagePosition('3') }" :src="locationImage3" @click="selectPosition('3')" alt="" />
+                    <img class="location-image" v-bind:class="{ selected: isSelectedImagePosition('3') }" :src="locationImage3" @click="selectPosition('3')" alt="" />
                     <h3>{{ locationImage3.toString().substring(48, locationImage3.length - 4) }}</h3>
                 </div>
             </div>
