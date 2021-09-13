@@ -14,15 +14,15 @@
             <div id="locationImages" class="location-images">
                 <div v-if="displayLocationImage1" id="locationImagePosition1">
                     <img class="location-image" v-bind:class="{ selected: isSelectedImagePosition('1')}" :src="locationImage1" @click="selectPosition('1')" alt="" />
-                    <h3>{{ locationImage1.toString().substring(48, locationImage1.length - 4) }}</h3>
+                    <h3>{{ locationImage1.toString().substr(locationImage1.toString().indexOf(' - ') - 2, (locationImage1.toString().substr(locationImage1.indexOf(' - ') - 2)).indexOf('.')) }}</h3>
                 </div>
                 <div v-if="displayLocationImage2" id="locationImagePosition2">
                     <img class="location-image" v-bind:class="{ selected: isSelectedImagePosition('2') }" :src="locationImage2" @click="selectPosition('2')" alt="" />
-                    <h3>{{ locationImage2.toString().substring(48, locationImage2.length - 4) }}</h3>
+                    <h3>{{ locationImage2.toString().substr(locationImage2.toString().indexOf(' - ') - 2, (locationImage2.toString().substr(locationImage2.indexOf(' - ') - 2)).indexOf('.')) }}</h3>
                 </div>
                 <div v-if="displayLocationImage3" id="locationImagePosition3">
                     <img class="location-image" v-bind:class="{ selected: isSelectedImagePosition('3') }" :src="locationImage3" @click="selectPosition('3')" alt="" />
-                    <h3>{{ locationImage3.toString().substring(48, locationImage3.length - 4) }}</h3>
+                    <h3>{{ locationImage3.toString().substr(locationImage3.toString().indexOf(' - ') - 2, (locationImage3.toString().substr(locationImage3.indexOf(' - ') - 2)).indexOf('.')) }}</h3>
                 </div>
             </div>
 
@@ -78,8 +78,35 @@
 <script setup>
 import { ref } from 'vue'
 import './RebirthLuggageImages.css'
-//import './RebirthLuggageImages.scss'
 import KeyPad from './KeyPad.vue'
+
+import RebirthLocationImage01 from './rebirthLuggageLocationImages/01 - Underneath Ramp At Security Comm Tower.jpg'
+import RebirthLocationImage02 from './rebirthLuggageLocationImages/02 - Prison Reception - Underneath Staircase.jpg'
+import RebirthLocationImage03 from './rebirthLuggageLocationImages/03 - 2nd Floor Decon - Above Circuit Breakers.jpg'
+import RebirthLocationImage04 from './rebirthLuggageLocationImages/04 - Top Gondola.jpg'
+import RebirthLocationImage05 from './rebirthLuggageLocationImages/05 - Shipping And Receiving - Behind Front Filing Cabinets.jpg'
+import RebirthLocationImage06 from './rebirthLuggageLocationImages/06 - Bio - 3rd Floor - By Periodic Chart.jpg'
+import RebirthLocationImage07 from './rebirthLuggageLocationImages/07 - 2nd Floor Cells - Lockers.jpg'
+import RebirthLocationImage08 from './rebirthLuggageLocationImages/08 - 2nd Floor Chem - Under stairs.jpg'
+import RebirthLocationImage09 from './rebirthLuggageLocationImages/09 - Shack Outside Construction - By Ladder.jpg'
+import RebirthLocationImage10 from './rebirthLuggageLocationImages/10 - Harbor - Pipes Outside.jpg'
+import RebirthLocationImage11 from './rebirthLuggageLocationImages/11 - Red Roof - Outside Behind Boxes.jpg'
+import RebirthLocationImage12 from './rebirthLuggageLocationImages/12 - Comunication Office - Behind Ceiling Extention.jpg'
+import RebirthLocationImage13 from './rebirthLuggageLocationImages/13 - Living Quarters - Top Room Bottom Bookshelf.jpg'
+import RebirthLocationImage14 from './rebirthLuggageLocationImages/14 - 2nd Floor Chem - Under Desk Near Window.jpg'
+import RebirthLocationImage15 from './rebirthLuggageLocationImages/15 - 2nd Building At Living Quarters Row - Bottom Windowless Room Above Bookshelf.jpg'
+import RebirthLocationImage16 from './rebirthLuggageLocationImages/16 - Outside Construction Sheds - Under Zip - Behind Barrels.jpg'
+import RebirthLocationImage17 from './rebirthLuggageLocationImages/17 - Nova Factory Watchtower - 3rd Floor - On Ceiling.jpg'
+import RebirthLocationImage18 from './rebirthLuggageLocationImages/18 - Middle Of Chem Tunnel - Above Bodies.jpg'
+import RebirthLocationImage19 from './rebirthLuggageLocationImages/19 - Inside Tunnel To Prison - Behind Power Unit.jpg'
+import RebirthLocationImage20 from './rebirthLuggageLocationImages/20 - 2nd Floor Decon - Behind TV By Buy.jpg'
+import RebirthLocationImage21 from './rebirthLuggageLocationImages/21 - Old Construction - Cement Mixer.jpg'
+import RebirthLocationImage22 from './rebirthLuggageLocationImages/22 - Decon - Behind Crates Outside Stairs.jpg'
+import RebirthLocationImage23 from './rebirthLuggageLocationImages/23 - Security Shack - Under Table.jpg'
+import RebirthLocationImage24 from './rebirthLuggageLocationImages/24 - Living Quarter Row - Outside Parachute Above Air Conditioner.jpg'
+import RebirthLocationImage25 from './rebirthLuggageLocationImages/25 - Nova - Middle Room - Behind Top Monitors.jpg'
+import RebirthLocationImage26 from './rebirthLuggageLocationImages/26 - Bio - Basement Piping Cubby.jpg'
+
 
 let keyCode1 = ref()
 let keyCode2 = ref()
@@ -128,109 +155,139 @@ let selectedImages = []
         }
 
         //if (selectedPosition !== null || (selectedPosition === null && selectedImages.filter(x => x.id === imageNumber)).length === 0) {
+            let locationImageSource = '';
             let locationImage = ''
             switch(imageNumber) {
                 case "1": 
+                    locationImageSource = RebirthLocationImage01
+                    locationImage = 'src/components/rebirthLuggageLocationImages/01 - Underneath Ramp At Security Comm Tower.jpg'
                     break
                 case "2":
+                    locationImageSource = RebirthLocationImage02
                     locationImage = "src/components/rebirthLuggageLocationImages/02 - Prison Reception - Underneath Staircase.jpg"
                     break
                 case "3":
+                    locationImageSource = RebirthLocationImage03
                     locationImage = "src/components/rebirthLuggageLocationImages/03 - 2nd Floor Decon - Above Circuit Breakers.jpg"
                     break
                 case "4":
+                    locationImageSource = RebirthLocationImage04
                     locationImage = "src/components/rebirthLuggageLocationImages/04 - Top Gondola.jpg"
                     break
                 case "5":
+                    locationImageSource = RebirthLocationImage05
                     locationImage = "src/components/rebirthLuggageLocationImages/05 - Shipping And Receiving - Behind Front Filing Cabinets.jpg"
                     break
                 case "6":
+                    locationImageSource = RebirthLocationImage06
                     locationImage = "src/components/rebirthLuggageLocationImages/06 - Bio - 3rd Floor - By Periodic Chart.jpg"
                     break
                 case "7":
+                    locationImageSource = RebirthLocationImage07
                     locationImage = "src/components/rebirthLuggageLocationImages/07 - 2nd Floor Cells - Lockers.jpg"
                     break
                 case "8":
+                    locationImageSource = RebirthLocationImage08
                     locationImage = "src/components/rebirthLuggageLocationImages/08 - 2nd Floor Chem - Under stairs.jpg"
                     break
                 case "9":
+                    locationImageSource = RebirthLocationImage09
                     locationImage = "src/components/rebirthLuggageLocationImages/09 - Shack Outside Construction - By Ladder.jpg"
                     break
                 case "10":
+                    locationImageSource = RebirthLocationImage10
                     locationImage = "src/components/rebirthLuggageLocationImages/10 - Harbor - Pipes Outside.jpg"
                     break
                 case "11":
+                    locationImageSource = RebirthLocationImage11
                     locationImage = "src/components/rebirthLuggageLocationImages/11 - Red Roof - Outside Behind Boxes.jpg"
                     break
                 case "12":
+                    locationImageSource = RebirthLocationImage12
                     locationImage = "src/components/rebirthLuggageLocationImages/12 - Comunication Office - Behind Ceiling Extention.jpg"
                     break
                 case "13":
+                    locationImageSource = RebirthLocationImage13
                     locationImage = "src/components/rebirthLuggageLocationImages/13 - Living Quarters - Top Room Bottom Bookshelf.jpg"
                     break
                 case "14":
+                    locationImageSource = RebirthLocationImage14
                     locationImage = "src/components/rebirthLuggageLocationImages/14 - 2nd Floor Chem - Under Desk Near Window.jpg"
                     break
                 case "15":
+                    locationImageSource = RebirthLocationImage15
                     locationImage = "src/components/rebirthLuggageLocationImages/15 - 2nd Building At Living Quarters Row - Bottom Windowless Room Above Bookshelf.jpg"
                     break
                 case "16":
+                    locationImageSource = RebirthLocationImage16
                     locationImage = "src/components/rebirthLuggageLocationImages/16 - Outside Construction Sheds - Under Zip - Behind Barrels.jpg"
                     break
                 case "17":
+                    locationImageSource = RebirthLocationImage17
                     locationImage = "src/components/rebirthLuggageLocationImages/17 - Nova Factory Watchtower - 3rd Floor - On Ceiling.jpg"
                     break
                 case "18":
+                    locationImageSource = RebirthLocationImage18
                     locationImage = "src/components/rebirthLuggageLocationImages/18 - Middle Of Chem Tunnel - Above Bodies.jpg"
                     break
                 case "19":
+                    locationImageSource = RebirthLocationImage19
                     locationImage = "src/components/rebirthLuggageLocationImages/19 - Inside Tunnel To Prison - Behind Power Unit.jpg"
                     break
                 case "20":
+                    locationImageSource = RebirthLocationImage20
                     locationImage = "src/components/rebirthLuggageLocationImages/20 - 2nd Floor Decon - Behing TV By Buy.jpg"
                     break
                 case "21":
+                    locationImageSource = RebirthLocationImage21
                     locationImage = "src/components/rebirthLuggageLocationImages/21 - Old Construction - Cement Mixer.jpg"
                     break
                 case "22":
+                    locationImageSource = RebirthLocationImage22
                     locationImage = "src/components/rebirthLuggageLocationImages/22 - Decon - Behind Crates Outside Stairs.jpg"
                     break
                 case "23":
+                    locationImageSource = RebirthLocationImage23
                     locationImage = "src/components/rebirthLuggageLocationImages/23 - Security Shack - Under Table.jpg"
                     break
                 case "24":
-                    locationImage = "src/components/rebirthLuggageLocationImages/24 - Living Quarter Row - Outside Parachute Above Air Conditioner.jpg"
+                    locationImageSource = RebirthLocationImage24
+                    locationImage = "24 - Living Quarter Row - Outside Parachute Above Air Conditioner.jpg"
                     break
                 case "25":
-                    locationImage = "src/components/rebirthLuggageLocationImages/25 - Nova - Middle Room - Behind Top Monitors.jpg"
+                    locationImageSource = RebirthLocationImage25
+                    locationImage = "25 - Nova - Middle Room - Behind Top Monitors.jpg"
                     break
                 case "26":
-                    locationImage = "src/components/rebirthLuggageLocationImages/26 - Bio - Basement Piping Cubby.jpg"
+                    locationImageSource = RebirthLocationImage26
+                    locationImage = "26 - Bio - Basement Piping Cubby.jpg"
                     break
                 default:
+                    locationImageSource = ''
                     locationImage = ''
             }
 
-            //if (selectedPosition === null && (locationImage1Open || locationImage2Open || locationImage3Open)) {
-                selectedImages = [];
-                selectedImages.push({ "id": imageNumber, "value": locationImage });
+            selectedImages = [];
 
-                if (currentlySelectedImages != undefined && currentlySelectedImages.length > 0) {
-                    currentlySelectedImages.forEach(x => { selectedImages.push(x) });
-                }
+            selectedImages.push({ "id": imageNumber, "value": locationImageSource });
+
+            if (currentlySelectedImages != undefined && currentlySelectedImages.length > 0) {
+                currentlySelectedImages.forEach(x => { selectedImages.push(x) });
+            }
                 
-            //}
 
             if (selectedPosition === 1 || selectedPosition === null && locationImage1Open) {
-                locationImage1.value = locationImage
+                locationImage1.value = locationImageSource
                 displayLocationImage1.value = true
                 locationImage1Open = false
+                console.log({ locationImage1 });
             } else if (selectedPosition === 2 || selectedPosition === null && locationImage2Open) {
-                locationImage2.value = locationImage
+                locationImage2.value = locationImageSource
                 displayLocationImage2.value = true
                 locationImage2Open = false
+                console.log({ locationImage2 })
             } else if (selectedPosition === 3 || selectedPosition === null && locationImage3Open) {
-                locationImage3.value = locationImage
+                locationImage3.value = locationImageSource
                 displayLocationImage3.value = true
                 locationImage3Open = false
             }
@@ -269,9 +326,9 @@ let selectedImages = []
         locationImage2Open = true
         locationImage3Open = true
         
-        displayLocationImage1 = false
-        displayLocationImage2 = false
-        displayLocationImage3 = false
+        displayLocationImage1.value = false
+        displayLocationImage2.value = false
+        displayLocationImage3.value = false
 
         selectedImages = []
 
