@@ -1,0 +1,6 @@
+{
+  "appId": "net.corp.pod",
+  "appName": "Rebirth",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}
