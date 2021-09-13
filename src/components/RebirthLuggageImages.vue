@@ -131,7 +131,6 @@ let selectedImages = []
             let locationImage = ''
             switch(imageNumber) {
                 case "1": 
-                    locationImage = "src/components/rebirthLuggageLocationImages/01 - Underneath Ramp At Security Comm Tower.jpg"
                     break
                 case "2":
                     locationImage = "src/components/rebirthLuggageLocationImages/02 - Prison Reception - Underneath Staircase.jpg"
