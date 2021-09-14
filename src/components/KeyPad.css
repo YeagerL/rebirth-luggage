@@ -1,20 +1,19 @@
 .keypad {
-    width: 300px; 
-    /* height: 300px; */
+    width: min-content; 
     border: 3px solid black;
     border-radius: 8px;
   }
   
   .keyCodeContainer {
-    background-color: darkslategrey;
     margin-top: 10px;
     height: 50px;
     width: 250px;
     text-align: center;
-    margin-left:22px;
+    margin-left: 6px;
+    margin-right: 6px;
   }
   
-  .keyCode {
+  .key-code {
     color: orangered;
     position: relative;
     padding-top: 5px;
@@ -29,37 +28,32 @@
     width: 60px;
   }
 
-  .keyCode input {
+  .key-code input {
     background: transparent;
     border: 0;
     border-bottom:1px solid #555;
     border-radius: 2px;
-    padding: 8px 0 5px 0;
-    /* color:#fff; */
-    color: rgb(255, 69, 0);
-    /*width:100%;*/
-    width:80px;
+    padding: 0 0 0 0;
+    color:#fff;
+    /* color: rgb(255, 69, 0); */
+    width: 80px;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 16pt;
+    font-size: 28pt;
     text-align: center;
   }
-  .keyCode input:focus{ 
+  
+  .key-code input:focus{ 
     border:none;	
     outline:none;
     border-bottom:1px solid #e74c3c;	
    }
    
-   .keyCode input:focus ~ label,
-   .keyCode input:valid ~ label{
+   .key-code input:focus ~ label,
+   .key-code input:valid ~ label{
      top:-12px;
      font-size:12px; 
    }
-  
-  .keyboard{
-    padding-left:15px;
-    /*padding-right:15px;*/
-  }
-  
+
   .key {
     background-image: -webkit-gradient(linear,left top,left bottom,from(), to(rgb(255, 69, 0)));
     background-image: -webkit-linear-gradient(top,#FDA352,rgb(255, 69, 0));

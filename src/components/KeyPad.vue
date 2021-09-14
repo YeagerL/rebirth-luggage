@@ -4,7 +4,7 @@
       <!--<input v-model='code' class="keyCode" type='text' placeholder='________' /> -->
 
       <div class="keyCodeContainer">
-        <div class="keyCode">
+        <div class="key-code">
           <input type="text" v-model="keyCode1" @focus="setFocus($event, 'keyCode1')" @input="numberOnly($event)" maxlength="3" /><span class="label-text">-</span>
           <input type="text" v-model="keyCode2" @focus="setFocus($event, 'keyCode2')" @input="numberOnly($event)" maxlength="2" id="keyCode2" /><span class="label-text">-</span>
           <input type="text" v-model="keyCode3" @focus="setFocus($event, 'keyCode3')" @input="numberOnly($event)" maxlength="3" />
@@ -17,13 +17,13 @@
             <td><button class="key numberKey" @click="onKeyPress('1')">1</button></td>
             <td><button class="key numberKey" @click="onKeyPress('2')">2</button></td>
             <td><button class="key numberKey" @click="onKeyPress('3')">3</button></td>
-            <td><button class="key back-key" @click="onBackspace()">&lt;</button></td>
+            <td><button class="key back-key" @click="onBackspace()">back</button></td>
           </tr>
           <tr>
             <td><button class="key numberKey" @click="onKeyPress('4')">4</button></td>
             <td><button class="key numberKey" @click="onKeyPress('5')">5</button></td>
             <td><button class="key numberKey" @click="onKeyPress('6')">6</button></td>
-            <td rowspan="2"><button class="key resetKey" @click="resetKeyCode()">Reset</button></td>
+            <td rowspan="2"><button class="key resetKey" @click="resetKeyCode()">Reset Code</button></td>
           </tr>
           <tr>
             <td><button class="key numberKey" @click="onKeyPress('7')">7</button></td>
@@ -103,15 +103,18 @@ import { defineProps, reactive } from 'vue'
     }
   }
 
-  const selectPreviousInput = () => {
-    if (selectedInput === 'keyCode2') {
-      selectedInput = 'keyCode1'
-      return
-    }
+  const setSelectedInput = (input) => {
+    selectedInput = input;
+  }
 
-    if (selectedInput === 'keyCode3') {
-      selectedInput = 'keyCode2'
-      return
+  const getPreviousInput = () => {
+    switch(selectedInput) {
+      case 'keyCode2':
+        return 'keyCode1';
+      case 'keyCode3':
+        return 'keyCode2';
+      default:
+        return 'keyCode1';
     }
   }
 
@@ -145,19 +148,38 @@ import { defineProps, reactive } from 'vue'
 
   const onBackspace = () => {
     if (selectedInput === 'keyCode1' && keyCode1.value.length === 0) {
-      return
+      return;
     }
 
     let inputValue = getInputValue(selectedInput);
-    let value = '';
-    if (inputValue.length > 0) {
-      value = inputValue.substr(0, inputValue.length - 1);
-      setValue(selectedInput, value)
-      if (value.length === 0) {
-        selectPreviousInput();
+
+    let input = selectedInput;
+    if (inputValue.length === 0) {
+      input = getPreviousInput();
+      inputValue = getInputValue(input);
+
+      if (inputValue.length === 0) {
+        input = getPreviousInput();
+        inputValue = getInputValue(input);
+
+        if (inputValue.length === 0) {
+          setSelectedInput(input);
+          return;
+        }
       }
     }
 
+    let value = '';
+    if (inputValue.length > 0) {
+      value = inputValue.substr(0, inputValue.length - 1);
+      setValue(input, value)
+      if (input !== selectedInput) {
+        setSelectedInput(input);
+      }
+      /* if (value.length === 0 && selectedInput !== 'keyCode1') {
+        selectedInput = getPreviousInput();
+      } */
+    }
   }
 
   const setFocus = (event, input) => {
