@@ -36,171 +36,128 @@
   </div>
 </template>
 
-<script setup>
-import { ref } from 'vue'
+<script>
+// import { ref } from 'vue'
 import './keypad.css'
-import { defineProps, reactive } from 'vue'
+// import { defineProps, reactive } from 'vue'
+import $ from 'jquery'
 
-  let selectedInput = 'keyCode1'
+export default {
+  // components: {},
+  data() {
+    return {
+      selectedInput: 'keyCode1',
+      keyCode1: '',
+      keyCode2: '',
+      keyCode3: ''
+    }
+  },
+  mounted: function () {
+    this.selectedInput = 'keyCode1'
+  },
+  methods: {
+    createNewValue(input, newInputValue) {
+      let currentInputValue = this.getInputValue(input)
 
-  let keyCode1 = ref()
+      let maxLength = 0
+      if (input === 'keyCode1' || input === 'keyCode3') {
+        maxLength = 3
+      }
+      else if (input === 'keyCode2') {
+        maxLength = 2
+      }
+
+      let newValue = ''
+      if (currentInputValue.length === maxLength) {
+        let partialCurrentValue = currentInputValue.slice(1).toString()
+        newValue = partialCurrentValue += newInputValue
+        return newValue
+      }
+
+      newValue = currentInputValue += newInputValue
+      return newValue
+    },
+    appendValue(input, value) {
+      let newValue = this.createNewValue(input, value);
+      this.setValue(input, newValue)
+    },
+    getInputValue(input) {
+      if (input === 'keyCode1') {
+        return this.keyCode1
+      }
+
+      if (input === 'keyCode2') {
+        return this.keyCode2
+      }
+
+      if (input === 'keyCode3') {
+        return this.keyCode3
+      }
+    },
+    setValue(input, value) {
+      if (input === 'keyCode1') {
+        this.keyCode1 = value
+        return
+      }
+
+      if (input === 'keyCode2') {
+        this.keyCode2 = value
+        return
+      }
+
+      if (input === 'keyCode3') {
+        this.keyCode3 = value
+        return
+      }
+    },
+    onBackspace() {
+      if (this.selectedInput === 'keyCode1' && this.keyCode1.length === 0) {
+        return;
+      }
+
+      let inputValue = this.getInputValue(this.selectedInput);
+
+      if (inputValue.length === 0) {
+        return
+      }
+
+      const value = inputValue.substr(0, inputValue.length - 1);
+      this.setValue(this.selectedInput, value)
+    },
+    setFocus(event, input) {
+      console.log("setFocus")
+      this.selectedInput = input
+      event.target.blur()
+      // event.target.select()
+    },
+    onKeyPress(value) {
+      this.appendValue(this.selectedInput, value)
+    },
+    numberOnly(event) {
+      event.target.value = event.target.value.replace(/[^0-9]/gi, "")
+    },
+    resetKeyCode() {
+      this.keyCode1 = ''
+      this.keyCode2 = ''
+      this.keyCode3 = ''
+
+      this.selectedInput = 'keyCode1'
+    }
+  }
+}
+
+  /* let this.selectedInput = 'keyCode1'
+
+  let this.keyCode1 = ref()
   let keyCode2 = ref()
   let keyCode3 = ref()
 
-  keyCode1.value = '';
+  this.keyCode1.value = '';
   keyCode2.value = '';
-  keyCode3.value = '';
+  keyCode3.value = ''; */
 
-  const setNewValue = (input, newInputValue) => {
-    let currentInputValue = getInputValue(input);
-
-    let maxLength = 0;
-    if (input === 'keyCode1' || input === 'keyCode3') {
-      maxLength = 3;
-    }
-    else if (input === 'keyCode2') {
-      maxLength = 2;
-    }
-
-    if (currentInputValue.length === maxLength) {
-      return newInputValue;
-    }
-
-    let newValue = currentInputValue += newInputValue;
-    return newValue;
-  }
-
-  const appendValue = (input, value) => {
-    let newValue = setNewValue(input, value);
-
-    if (input === 'keyCode1') {
-      keyCode1.value = newValue;
-
-      if (keyCode1.value.toString().length === 3) {
-        selectedInput = 'keyCode2'
-      }
-      return
-    }
-
-    if (input === 'keyCode2') {
-      keyCode2.value = newValue;
-
-      if (keyCode2.value.toString().length === 2) {
-        selectedInput = 'keyCode3'
-      }
-      return
-    }
-
-    if (input === 'keyCode3') {
-      /* if (keyCode3.value.toString().length === 3) {
-        let leftSide = keyCode3.value.substr(0, 2);
-        keyCode3.value = leftSide += value;
-        return
-      } */
-
-      keyCode3.value = newValue;
-      return
-    }
-  }
-
-  const setSelectedInput = (input) => {
-    selectedInput = input;
-  }
-
-  const getPreviousInput = () => {
-    switch(selectedInput) {
-      case 'keyCode2':
-        return 'keyCode1';
-      case 'keyCode3':
-        return 'keyCode2';
-      default:
-        return 'keyCode1';
-    }
-  }
-
-  const getInputValue = (input) => {
-    if (input === 'keyCode1') {
-      return keyCode1.value
-    }
-
-    if (input === 'keyCode2') {
-      return keyCode2.value
-    }
-
-    if (input === 'keyCode3') {
-      return keyCode3.value
-    }
-  }
-
-  const setValue = (input, value) => {
-    if (input === 'keyCode1') {
-      keyCode1.value = value
-    }
-
-    if (input === 'keyCode2') {
-      keyCode2.value = value
-    }
-
-    if (input === 'keyCode3') {
-      keyCode3.value = value
-    }
-  }
-
-  const onBackspace = () => {
-    if (selectedInput === 'keyCode1' && keyCode1.value.length === 0) {
-      return;
-    }
-
-    let inputValue = getInputValue(selectedInput);
-
-    let input = selectedInput;
-    if (inputValue.length === 0) {
-      input = getPreviousInput();
-      inputValue = getInputValue(input);
-
-      if (inputValue.length === 0) {
-        input = getPreviousInput();
-        inputValue = getInputValue(input);
-
-        if (inputValue.length === 0) {
-          setSelectedInput(input);
-          return;
-        }
-      }
-    }
-
-    let value = '';
-    if (inputValue.length > 0) {
-      value = inputValue.substr(0, inputValue.length - 1);
-      setValue(input, value)
-      if (input !== selectedInput) {
-        setSelectedInput(input);
-      }
-      /* if (value.length === 0 && selectedInput !== 'keyCode1') {
-        selectedInput = getPreviousInput();
-      } */
-    }
-  }
-
-  const setFocus = (event, input) => {
-    selectedInput = input
-    event.target.select()
-  }
-
-  const onKeyPress = (value) => {
-    appendValue(selectedInput, value)
-  }
-
-  const numberOnly = (event) => {
-    event.target.value = event.target.value.replace(/[^0-9]/gi, "")
-  }
-
-  const resetKeyCode = () => {
-    keyCode1.value = ''
-    keyCode2.value = ''
-    keyCode3.value = ''
-
-    selectedInput = 'keyCode1'
-  }
+  $(document).ready(function() {
+    $('[data-disable-touch-keyboard]').attr('readonly', 'readonly');
+  });
 
 </script>
