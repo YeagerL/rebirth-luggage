@@ -5,9 +5,11 @@
 
       <div class="keyCodeContainer">
         <div class="key-code">
-          <input type="text" v-model="keyCode1" @focus="setFocus($event, 'keyCode1')" @input="numberOnly($event)" maxlength="3" /><span class="label-text">-</span>
-          <input type="text" v-model="keyCode2" @focus="setFocus($event, 'keyCode2')" @input="numberOnly($event)" maxlength="2" id="keyCode2" /><span class="label-text">-</span>
-          <input type="text" v-model="keyCode3" @focus="setFocus($event, 'keyCode3')" @input="numberOnly($event)" maxlength="3" />
+          <input type="text" v-bind:class="{ selected: isSelected('keyCode1') }" v-model="keyCode1" @focus="setFocus($event, 'keyCode1')" @input="numberOnly($event)" maxlength="3" data-disable-touch-keyboard />
+          <span class="label-text">-</span>
+          <input type="text" v-bind:class="{ selected: isSelected('keyCode2') }" v-model="keyCode2" @focus="setFocus($event, 'keyCode2')" @input="numberOnly($event)" maxlength="2" id="keyCode2" data-disable-touch-keyboard />
+          <span class="label-text">-</span>
+          <input type="text" v-bind:class="{ selected: isSelected('keyCode3') }" v-model="keyCode3" @focus="setFocus($event, 'keyCode3')" @input="numberOnly($event)" maxlength="3" data-disable-touch-keyboard />
         </div>
       </div>
     
@@ -56,6 +58,10 @@ export default {
     this.selectedInput = 'keyCode1'
   },
   methods: {
+    isSelected(input) {
+      console.log("isSelected")
+      return this.selectedInput === input
+    },
     createNewValue(input, newInputValue) {
       let currentInputValue = this.getInputValue(input)
 

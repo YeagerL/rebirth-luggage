@@ -90,7 +90,15 @@
   }
   
   .key:focus {
-    outline: thin dotted;
+    outline: thin dotted yellow;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+    border-color: transparent;
+    box-shadow: none;
+  }
+
+  .selected {
+    outline: thin dotted yellow;
     outline: 5px auto -webkit-focus-ring-color;
     outline-offset: -2px;
     border-color: transparent;
