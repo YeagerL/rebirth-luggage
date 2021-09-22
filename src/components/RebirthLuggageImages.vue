@@ -12,7 +12,16 @@
             ></vue-easy-lightbox>
         </div>
 
+        <div>
+            <button class="key toggle" v-if="!this.displayLuggageLocations" @click="toggleDisplayLuggageLocations">Show Luggage Locations</button>
+            <button class="key toggle" v-if="this.displayLuggageLocations" @click="toggleDisplayLuggageLocations">Hide Luggage Locations</button>
+        </div>
+
         <div id="images">
+            <div id="luggage-locations" v-if="displayLuggageLocations">
+                <img src="../components/rebirthLuggageImages/LuggageLocations.jpg" alt="" />
+            </div>
+
             <div v-if="!displayKeypad">
                 <table class="rebirth-images">
                     <tbody>
@@ -144,6 +153,7 @@ export default {
             displayLocationImage3: [],
             displayKeypad: [],
             displayImages: [],
+            displayLuggageLocations: [],
             selectedPosition: null,
             locationImage1Open: [],
             locationImage2Open: [],
@@ -183,6 +193,8 @@ export default {
         // let displayImages = ref('')
         this.displayImages = true
 
+        this.displayLuggageLocations = false
+
         // let selectedPosition = null
 
         // let locationImage1Open = true
@@ -192,8 +204,13 @@ export default {
         // let selectedImages = []
     },
     methods: {
-        zoomImage(imageSource) {
-            const title = (imageSource.toString().substr(imageSource.toString().indexOf(' - ') - 2, (imageSource.toString().substr(imageSource.indexOf(' - ') - 2)).indexOf('.')))
+        toggleDisplayLuggageLocations() {
+            this.displayLuggageLocations = !this.displayLuggageLocations
+        },
+        zoomImage(imageSource, title = null) {
+            if (title === null) {
+                title = (imageSource.toString().substr(imageSource.toString().indexOf(' - ') - 2, (imageSource.toString().substr(imageSource.indexOf(' - ') - 2)).indexOf('.')))
+            }            
 
             this.imgs = [{ 
                 title: title,
