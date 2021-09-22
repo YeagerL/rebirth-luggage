@@ -12,6 +12,11 @@ import RebirthLuggageImages from './components/RebirthLuggageImages.vue'
 </script>
 
 <style>
+
+body {
+  background-color: black;
+}
+
 #app {
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -21,9 +26,4 @@ import RebirthLuggageImages from './components/RebirthLuggageImages.vue'
   /*margin-top: 60px;*/
 }
 
-@font-face {
-  font-family: "ModernWarfare";
-  src: local("ModernWarfare"),
-   url(./fonts/ModernWarfare-8MM6z.ttf) format("truetype");
-}
 </style>

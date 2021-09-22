@@ -1,8 +1,6 @@
 <template id="KeyPad">
   <div>
     <div class="keypad">
-      <!--<input v-model='code' class="keyCode" type='text' placeholder='________' /> -->
-
       <div class="keyCodeContainer">
         <div class="key-code">
           <input type="text" v-bind:class="{ selected: isSelected('keyCode1') }" v-model="keyCode1" @focus="setFocus($event, 'keyCode1')" @input="numberOnly($event)" maxlength="3" data-disable-touch-keyboard />
@@ -39,13 +37,9 @@
 </template>
 
 <script>
-// import { ref } from 'vue'
 import './keypad.css'
-// import { defineProps, reactive } from 'vue'
-import $ from 'jquery'
 
 export default {
-  // components: {},
   data() {
     return {
       selectedInput: 'keyCode1',
@@ -59,11 +53,11 @@ export default {
   },
   methods: {
     isSelected(input) {
-      console.log("isSelected")
       return this.selectedInput === input
     },
     createNewValue(input, newInputValue) {
-      let currentInputValue = this.getInputValue(input)
+      // let currentInputValue = this.getInputValue(input)
+      let currentInputValue = this[this.selectedInput]
 
       let maxLength = 0
       if (input === 'keyCode1' || input === 'keyCode3') {
@@ -85,9 +79,10 @@ export default {
     },
     appendValue(input, value) {
       let newValue = this.createNewValue(input, value);
-      this.setValue(input, newValue)
+      this[this.selectedInput] = newValue
+      // this.setValue(input, newValue)
     },
-    getInputValue(input) {
+    /* getInputValue(input) {
       if (input === 'keyCode1') {
         return this.keyCode1
       }
@@ -99,8 +94,8 @@ export default {
       if (input === 'keyCode3') {
         return this.keyCode3
       }
-    },
-    setValue(input, value) {
+    }, */ 
+    /* setValue(input, value) {
       if (input === 'keyCode1') {
         this.keyCode1 = value
         return
@@ -115,26 +110,26 @@ export default {
         this.keyCode3 = value
         return
       }
-    },
+    }, */
     onBackspace() {
       if (this.selectedInput === 'keyCode1' && this.keyCode1.length === 0) {
         return;
       }
 
-      let inputValue = this.getInputValue(this.selectedInput);
+      const inputValue = this[this.selectedInput]
+      // const inputValue = this.getInputValue(this.selectedInput);
 
       if (inputValue.length === 0) {
         return
       }
 
       const value = inputValue.substr(0, inputValue.length - 1);
-      this.setValue(this.selectedInput, value)
+      this[this.selectedInput] = value
+      // this.setValue(this.selectedInput, value)
     },
     setFocus(event, input) {
-      console.log("setFocus")
       this.selectedInput = input
       event.target.blur()
-      // event.target.select()
     },
     onKeyPress(value) {
       this.appendValue(this.selectedInput, value)
@@ -151,19 +146,5 @@ export default {
     }
   }
 }
-
-  /* let this.selectedInput = 'keyCode1'
-
-  let this.keyCode1 = ref()
-  let keyCode2 = ref()
-  let keyCode3 = ref()
-
-  this.keyCode1.value = '';
-  keyCode2.value = '';
-  keyCode3.value = ''; */
-
-  $(document).ready(function() {
-    $('[data-disable-touch-keyboard]').attr('readonly', 'readonly');
-  });
 
 </script>
