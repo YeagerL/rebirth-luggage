@@ -12,17 +12,39 @@
             ></vue-easy-lightbox>
         </div>
 
-        <div>
-            <button class="key toggle" v-if="!this.displayLuggageLocations" @click="toggleDisplayLuggageLocations">Show Luggage Locations</button>
-            <button class="key toggle" v-if="this.displayLuggageLocations" @click="toggleDisplayLuggageLocations">Hide Luggage Locations</button>
+        <!-- <div id="topRow"> -->
+        <div id="topButtons" align="right">
+            <div>
+                <button id="keypad-toggle" class="key toggle" @click="this.displayKeypad = !this.displayKeypad">Keypad</button>
+            </div>
+
+            <div>
+                <button class="key toggle" v-if="!this.displayLuggageLocations" @click="toggleDisplayLuggageLocations">Show Luggage Locations</button>
+                <button class="key toggle" v-if="this.displayLuggageLocations" @click="toggleDisplayLuggageLocations">Hide Luggage Locations</button>
+            </div>
+
+            <div>
+                <button class="key toggle" v-if="!this.displayRebirthImages || this.allPositionsFilled()" @click="this.displayRebirthImages = !this.displayRebirthImages">
+                    {{ !this.displayRebirthImages ? 'Show' : 'Hide'}} Luggage Pictures
+                </button>
+            </div>
+
+            <div>
+                <button class="key key-round" @click="(this.togglegif = !this.togglegif)" v-bind:class="{ togglegif : this.togglegif }"></button>  
+                <div>
+                    gif {{ this.togglegif ? 'off' : 'on' }}
+                </div>
+            </div>
         </div>
+        <!-- </div> -->
 
         <div id="images">
             <div id="luggage-locations" v-if="displayLuggageLocations">
+                <!-- <img @click="zoomImage('../components/rebirthLuggageImages/LuggageLocations.jpg')" src="../components/rebirthLuggageImages/LuggageLocations.jpg" alt="" /> -->
                 <img src="../components/rebirthLuggageImages/LuggageLocations.jpg" alt="" />
             </div>
 
-            <div v-if="!displayKeypad">
+            <div v-if="displayRebirthImages">
                 <table class="rebirth-images">
                     <tbody>
                         <tr>
@@ -61,36 +83,37 @@
                 </table>
             </div>
 
+            
+
             <div id="locationImages" class="location-images">
-                <div v-if="displayLocationImage1" id="locationImagePosition1">
-                    <img class="location-image" v-bind:class="{ selected: isSelectedImagePosition('1')}" :src="locationImage1" @click="zoomImage(locationImage1)" alt="" />
-                    <h3>{{ '(' + (locationImage1.split('/')[locationImage1.split('/').length - 1]).substr(0, 2) + ') ' + (locationImage1.split(' - ')[locationImage1.split(' - ').length - 2]) }}</h3>
-                    <h3>{{ (locationImage1.split(' - ')[locationImage1.split(' - ').length - 1]).substr(0, (locationImage1.split(' - ')[locationImage1.split(' - ').length - 1]).indexOf('.')) }}</h3>
-                    <!-- <h3>{{ locationImage1.toString().substr(locationImage1.toString().indexOf(' - ') - 2, (locationImage1.toString().substr(locationImage1.indexOf(' - ') - 2)).indexOf('.')) }}</h3> -->
+                <div v-if="(this.selectedLocationImages !== undefined && this.selectedLocationImages[0].value !== '')" id="locationImagePosition1">
+                    <img class="location-image" v-bind:class="{ selected: isSelectedImagePosition('1')}" :src="!this.togglegif && selectedLocationImages[0].video.length > 0 ? selectedLocationImages[0].video : selectedLocationImages[0].value" @click="zoomImage(selectedLocationImages[0])" alt="" />
+                    <h3>{{ this.buildImageTitle(0) }}</h3>
+                    <h3>{{ this.buildImageDescription(0) }}</h3>
                 </div>
-                <div v-if="displayLocationImage2" id="locationImagePosition2">
-                    <img class="location-image" v-bind:class="{ selected: isSelectedImagePosition('2') }" :src="locationImage2" @click="zoomImage(locationImage2)" alt="" />
-                    <h3>{{ '(' + (locationImage2.split('/')[locationImage2.split('/').length - 1]).substr(0, 2) + ') ' + (locationImage2.split(' - ')[locationImage2.split(' - ').length - 2]) }}</h3>
-                    <h3>{{ (locationImage2.split(' - ')[locationImage2.split(' - ').length - 1]).substr(0, (locationImage2.split(' - ')[locationImage2.split(' - ').length - 1]).indexOf('.')) }}</h3>
-                    <!-- <h3>{{ locationImage2.toString().substr(locationImage2.toString().indexOf(' - ') - 2, (locationImage2.toString().substr(locationImage2.indexOf(' - ') - 2)).indexOf('.')) }}</h3> -->
+                <div v-if="(this.selectedLocationImages !== undefined && this.selectedLocationImages[1].value !== '')" id="locationImagePosition2">
+                    <img class="location-image" v-bind:class="{ selected: isSelectedImagePosition('2') }" :src="!this.togglegif && selectedLocationImages[1].video.length > 0 ? selectedLocationImages[1].video : selectedLocationImages[1].value" @click="zoomImage(selectedLocationImages[1])" alt="" />
+                    <h3>{{ this.buildImageTitle(1) }}</h3>
+                    <h3>{{ this.buildImageDescription(1) }}</h3>
                 </div>
-                <div v-if="displayLocationImage3" id="locationImagePosition3">
-                    <img class="location-image" v-bind:class="{ selected: isSelectedImagePosition('3') }" :src="locationImage3" @click="zoomImage(locationImage3)" alt="" />
-                    <h3>{{ '(' + (locationImage3.split('/')[locationImage3.split('/').length - 1]).substr(0, 2) + ') ' + (locationImage3.split(' - ')[locationImage3.split(' - ').length - 2]) }}</h3>
-                    <h3>{{ (locationImage3.split(' - ')[locationImage3.split(' - ').length - 1]).substr(0, (locationImage3.split(' - ')[locationImage3.split(' - ').length - 1]).indexOf('.')) }}</h3>
-                    <!-- <h3>{{ locationImage3.toString().substr(locationImage3.toString().indexOf(' - ') - 2, (locationImage3.toString().substr(locationImage3.indexOf(' - ') - 2)).indexOf('.')) }}</h3> -->
+                <div v-if="(this.selectedLocationImages !== undefined && this.selectedLocationImages[2].value !== '')" id="locationImagePosition3">
+                    <img class="location-image" v-bind:class="{ selected: isSelectedImagePosition('3') }" :src="!this.togglegif && selectedLocationImages[2].video.length > 0 ? selectedLocationImages[2].video : selectedLocationImages[2].value" @click="zoomImage(selectedLocationImages[2])" alt="" />
+                    <h3>{{ this.buildImageTitle(2) }}</h3>
+                    <h3>{{ this.buildImageDescription(2) }}</h3>
                 </div>
             </div>
-        </div>
 
-        <div id="key-pad" v-if="displayKeypad">
-            <div>
-             <KeyPad />
+            <div id="key-pad" v-if="displayKeypad">
+                <div>
+                    <KeyPad />
+                </div>
             </div>
-        </div>
+            
+            <div class="reset-images" v-if="(this.selectedLocationImages.find(x => x.value.length > 0) !== undefined)">
+                <button class="key" @click="reset()">Reset Images</button>
+            </div>
 
-        <div class="reset-images">
-            <button class="key" @click="reset()">Reset Images</button>
+            
         </div>
 
     </div>
@@ -105,31 +128,37 @@ import VueEasyLightbox from 'vue-easy-lightbox'
 // import VueEasyLightboxComponent from './VueEasyLightbox.vue'
 
 import RebirthLocationImage01 from './rebirthLuggageLocationImages/01 - Security - Underneath Ramp At Security Comm Tower.jpg'
+import RebirthLocationVideo01 from './rebirthLuggageLocationImages/01 - Security - Underneath Ramp At Security Comm Tower.gif'
+
 import RebirthLocationImage02 from './rebirthLuggageLocationImages/02 - Prison Reception - Underneath Staircase.jpg'
-import RebirthLocationImage03 from './rebirthLuggageLocationImages/03 - 2nd Floor Decon - Above Circuit Breakers.jpg'
+
+import RebirthLocationImage03 from './rebirthLuggageLocationImages/03 - Decon 2nd Floor - Above Circuit Breakers.jpg'
+import RebirthLocationVideo03 from './rebirthLuggageLocationImages/03 - Decon 2nd Floor - Above Circuit Breakers.gif'
+
 import RebirthLocationImage04 from './rebirthLuggageLocationImages/04 - Gondola - Top Gondola.jpg'
+import RebirthLocationVideo04 from './rebirthLuggageLocationImages/04 - Gondola - Top Gondola.gif'
+
+
 import RebirthLocationImage05 from './rebirthLuggageLocationImages/05 - Shipping And Receiving - Behind Front Filing Cabinets.jpg'
-import RebirthLocationImage06 from './rebirthLuggageLocationImages/06 - Bio - 3rd Floor (By Periodic Chart).jpg'
-import RebirthLocationImage07 from './rebirthLuggageLocationImages/07 - 2nd Floor Cells - Lockers.jpg'
-import RebirthLocationImage08 from './rebirthLuggageLocationImages/08 - 2nd Floor Chem - Under stairs.jpg'
-import RebirthLocationImage09 from './rebirthLuggageLocationImages/09 - Shack Outside Construction - By Ladder.jpg'
-import RebirthLocationImage10 from './rebirthLuggageLocationImages/10 - Harbor - Pipes Outside.jpg'
+import RebirthLocationImage06 from './rebirthLuggageLocationImages/06 - Bio - 3rd Floor By Periodic Chart.jpg'
+import RebirthLocationImage07 from './rebirthLuggageLocationImages/07 - Cells - 2nd Floor Lockers.jpg'
+import RebirthLocationImage08 from './rebirthLuggageLocationImages/08 - Chem - 2nd Floor Under stairs Behind Pipe.jpg'
+import RebirthLocationImage09 from './rebirthLuggageLocationImages/09 - Shack Outside Control - By Ladder.png'
+import RebirthLocationImage10 from './rebirthLuggageLocationImages/10 - Harbor - Pipes Outside.png'
 import RebirthLocationImage11 from './rebirthLuggageLocationImages/11 - Red Roof - Outside Behind Boxes.jpg'
-import RebirthLocationImage12 from './rebirthLuggageLocationImages/12 - Comunication Office - Behind Ceiling Extention.jpg'
+import RebirthLocationImage12 from './rebirthLuggageLocationImages/12 - Communication Office - Behind Ceiling Extention (Bottom floor).jpg'
 import RebirthLocationImage13 from './rebirthLuggageLocationImages/13 - Living Quarters - Top Room Bottom Bookshelf.jpg'
-import RebirthLocationImage14 from './rebirthLuggageLocationImages/14 - 2nd Floor Chem - Under Desk Near Window.jpg'
+import RebirthLocationImage14 from './rebirthLuggageLocationImages/14 - Chem 4th Floor - Under Desk Near Window.jpg'
 import RebirthLocationImage15 from './rebirthLuggageLocationImages/15 - 2nd Building At Living Quarters Row - Bottom Windowless Room Above Bookshelf.jpg'
-import RebirthLocationImage16 from './rebirthLuggageLocationImages/16 - Outside Construction Sheds - Under Zip (Behind Barrels).jpg'
-import RebirthLocationImage17 from './rebirthLuggageLocationImages/17 - Nova Factory Watchtower - 3rd Floor (On Ceiling).jpg'
+import RebirthLocationImage16 from './rebirthLuggageLocationImages/16 - Outside Control Sheds - Under Zip Behind Barrels.jpg'
+import RebirthLocationImage17 from './rebirthLuggageLocationImages/17 - Nova Factory Watchtower - 3rd Floor On Ceiling.jpg'
 import RebirthLocationImage18 from './rebirthLuggageLocationImages/18 - Middle Of Chem Tunnel - Above Bodies.jpg'
 import RebirthLocationImage19 from './rebirthLuggageLocationImages/19 - Inside Tunnel To Prison - Behind Power Unit.jpg'
-import RebirthLocationImage20 from './rebirthLuggageLocationImages/20 - 2nd Floor Decon - Behind TV By Buy.jpg'
-// import RebirthLocationImage21 from './rebirthLuggageLocationImages/21 - Old Construction - Cement Mixer.jpg'
+import RebirthLocationImage20 from './rebirthLuggageLocationImages/20 - Decon 2nd Floor - Behind TV By Buy.jpg'
 import RebirthLocationImage22 from './rebirthLuggageLocationImages/22 - Decon - Behind Crates Outside Stairs.jpg'
 import RebirthLocationImage23 from './rebirthLuggageLocationImages/23 - Security Shack - Under Table.jpg'
 import RebirthLocationImage24 from './rebirthLuggageLocationImages/24 - Living Quarter Row - Outside Parachute Above Air Conditioner.jpg'
-import RebirthLocationImage25 from './rebirthLuggageLocationImages/25 - Nova - Middle Room (Behind Top Monitors).jpg'
-import RebirthLocationImage26 from './rebirthLuggageLocationImages/26 - Bio - Basement Piping Cubby.jpg'
+import RebirthLocationImage25 from './rebirthLuggageLocationImages/25 - Nova - Middle Room Behind Top Monitors.jpg'
 
 export default {
     components: {
@@ -148,229 +177,208 @@ export default {
             locationImage1: '',
             locationImage2: '',
             locationImage3: '',
-            displayLocationImage1: [],
-            displayLocationImage2: [],
-            displayLocationImage3: [],
-            displayKeypad: [],
+            displayKeypad: false,
             displayImages: [],
-            displayLuggageLocations: [],
+            displayLuggageLocations: false,
+            displayRebirthImages: [],
             selectedPosition: null,
-            locationImage1Open: [],
-            locationImage2Open: [],
-            locationImage3Open: []
+            selectedLocationImages: [
+                { id : 0, value : '' },
+                { id : 0, value : '' },
+                { id : 0, value : '' }
+            ],
+            togglegif: false
         }
     },
     mounted() {
-        // let imgs = ref('')
-        // let visible = ref()
-        // let index = ref()
-        // let imgs = [{ title: 'abcd', src: 'http://via.placeholder.com/350x150' }]
-
-        // imgs = []
-        // imgs = [{ title: 'abcd', src: 'http://via.placeholder.com/350x150' }]
-        // visible.value = true
-        // index = 0
-
-        // let keyCode1 = ref()
-        // let keyCode2 = ref()
-        // let keyCode3 = ref()
-
-        // let locationImage1 = ref()
-        // let locationImage2 = ref()
-        // let locationImage3 = ref()
-
-        // let displayLocationImage1 = ref('')
-        // let displayLocationImage2 = ref('')
-        // let displayLocationImage3 = ref('')
-
-        this.displayLocationImage1 = false
-        this.displayLocationImage2 = false
-        this.displayLocationImage3 = false
-
-        // let displayKeypad = ref('')
         this.displayKeypad = false
 
-        // let displayImages = ref('')
         this.displayImages = true
-
         this.displayLuggageLocations = false
+        this.displayRebirthImages = true
 
-        // let selectedPosition = null
-
-        // let locationImage1Open = true
-        // let locationImage2Open = true
-        // let locationImage3Open = true
-
-        // let selectedImages = []
+        this.selectedLocationImages = [
+            { id : 0, value : '' },
+            { id : 0, value : '' },
+            { id : 0, value : '' }
+        ]
     },
     methods: {
         toggleDisplayLuggageLocations() {
             this.displayLuggageLocations = !this.displayLuggageLocations
         },
-        zoomImage(imageSource, title = null) {
+        buildImageTitle(imageIndex) {
+            if (this.selectedLocationImages[imageIndex] === undefined) {
+                return
+            }
+            const image = this.selectedLocationImages[imageIndex].value
+            const imageTitle = image === undefined ? '' : '(' + (image.split('/')[image.split('/').length - 1]).substr(0, 2) + ') ' + (image.split(' - ')[image.split(' - ').length - 2])
+            return imageTitle
+        },
+        buildImageDescription(imageIndex) {
+            if (this.selectedLocationImages[imageIndex] === undefined) {
+                return
+            }
+
+            const image = this.selectedLocationImages[imageIndex].value
+            const description = image === undefined ? '' : (image.split(' - ')[image.split(' - ').length - 1]).substr(0, (image.split(' - ')[image.split(' - ').length - 1]).indexOf('.'))
+            return description
+        },
+        zoomImage(image, title = null) {
+            const imageSource = image.value
+
             if (title === null) {
                 title = (imageSource.toString().substr(imageSource.toString().indexOf(' - ') - 2, (imageSource.toString().substr(imageSource.indexOf(' - ') - 2)).indexOf('.')))
-            }            
+            }
 
-            this.imgs = [{ 
+            let images = [];
+            if (!this.togglegif && image.video !== undefined && image.video.length > 0) {
+                images.push({
+                    title : title,
+                    src : image.video.toString() 
+                })
+            }
+
+            images.push({
                 title: title,
-                src: imageSource.toString()
-            }]
+                src: imageSource.toString(),
+            })
+
+            this.imgs = images
             this.show()
         },
+        allPositionsFilled() {
+            return (this.selectedLocationImages !== undefined && (this.selectedLocationImages.find(x => x.value === '') === undefined))
+        },
         onClick(imageNumber) {
+            debugger
             if (this.selectedImages.filter(x => x.id === imageNumber).length > 0) {
                 return;
             }
 
             let currentlySelectedImages = this.selectedImages;
             
-
             // no position is selected and all three image positions are filled
-            if (this.selectedPosition === null && !this.locationImage1Open && !this.locationImage2Open && !this.locationImage3Open) {
+            if (this.selectedPosition === null && this.allPositionsFilled()) {
                 return
                 // this.selectedPosition = 3
             }
 
             //if (this.selectedPosition !== null || (this.selectedPosition === null && selectedImages.filter(x => x.id === imageNumber)).length === 0) {
-                let locationImageSource = '';
-                let locationImage = ''
+                let locationImageSource = ''
+                let locationVideoSource = ''
                 switch(imageNumber) {
                     case "1": 
                         locationImageSource = RebirthLocationImage01
-                        locationImage = 'src/components/rebirthLuggageLocationImages/01 - Underneath Ramp At Security Comm Tower.jpg'
+                        locationVideoSource = RebirthLocationVideo01
                         break
                     case "2":
                         locationImageSource = RebirthLocationImage02
-                        locationImage = "src/components/rebirthLuggageLocationImages/02 - Prison Reception - Underneath Staircase.jpg"
                         break
                     case "3":
                         locationImageSource = RebirthLocationImage03
-                        locationImage = "src/components/rebirthLuggageLocationImages/03 - 2nd Floor Decon - Above Circuit Breakers.jpg"
+                        locationVideoSource = RebirthLocationVideo03
                         break
                     case "4":
                         locationImageSource = RebirthLocationImage04
-                        locationImage = "src/components/rebirthLuggageLocationImages/04 - Top Gondola.jpg"
+                        locationVideoSource = RebirthLocationVideo04
                         break
                     case "5":
                         locationImageSource = RebirthLocationImage05
-                        locationImage = "src/components/rebirthLuggageLocationImages/05 - Shipping And Receiving - Behind Front Filing Cabinets.jpg"
                         break
                     case "6":
                         locationImageSource = RebirthLocationImage06
-                        locationImage = "src/components/rebirthLuggageLocationImages/06 - Bio - 3rd Floor - By Periodic Chart.jpg"
                         break
                     case "7":
                         locationImageSource = RebirthLocationImage07
-                        locationImage = "src/components/rebirthLuggageLocationImages/07 - 2nd Floor Cells - Lockers.jpg"
                         break
                     case "8":
                         locationImageSource = RebirthLocationImage08
-                        locationImage = "src/components/rebirthLuggageLocationImages/08 - 2nd Floor Chem - Under stairs.jpg"
                         break
                     case "9":
                         locationImageSource = RebirthLocationImage09
-                        locationImage = "src/components/rebirthLuggageLocationImages/09 - Shack Outside Construction - By Ladder.jpg"
                         break
                     case "10":
                         locationImageSource = RebirthLocationImage10
-                        locationImage = "src/components/rebirthLuggageLocationImages/10 - Harbor - Pipes Outside.jpg"
                         break
                     case "11":
                         locationImageSource = RebirthLocationImage11
-                        locationImage = "src/components/rebirthLuggageLocationImages/11 - Red Roof - Outside Behind Boxes.jpg"
                         break
                     case "12":
                         locationImageSource = RebirthLocationImage12
-                        locationImage = "src/components/rebirthLuggageLocationImages/12 - Comunication Office - Behind Ceiling Extention.jpg"
                         break
                     case "13":
                         locationImageSource = RebirthLocationImage13
-                        locationImage = "src/components/rebirthLuggageLocationImages/13 - Living Quarters - Top Room Bottom Bookshelf.jpg"
                         break
                     case "14":
                         locationImageSource = RebirthLocationImage14
-                        locationImage = "src/components/rebirthLuggageLocationImages/14 - 2nd Floor Chem - Under Desk Near Window.jpg"
                         break
                     case "15":
                         locationImageSource = RebirthLocationImage15
-                        locationImage = "src/components/rebirthLuggageLocationImages/15 - 2nd Building At Living Quarters Row - Bottom Windowless Room Above Bookshelf.jpg"
                         break
                     case "16":
                         locationImageSource = RebirthLocationImage16
-                        locationImage = "src/components/rebirthLuggageLocationImages/16 - Outside Construction Sheds - Under Zip - Behind Barrels.jpg"
                         break
                     case "17":
                         locationImageSource = RebirthLocationImage17
-                        locationImage = "src/components/rebirthLuggageLocationImages/17 - Nova Factory Watchtower - 3rd Floor - On Ceiling.jpg"
                         break
                     case "18":
                         locationImageSource = RebirthLocationImage18
-                        locationImage = "src/components/rebirthLuggageLocationImages/18 - Middle Of Chem Tunnel - Above Bodies.jpg"
                         break
                     case "19":
                         locationImageSource = RebirthLocationImage19
-                        locationImage = "src/components/rebirthLuggageLocationImages/19 - Inside Tunnel To Prison - Behind Power Unit.jpg"
                         break
                     case "20":
                         locationImageSource = RebirthLocationImage20
-                        locationImage = "src/components/rebirthLuggageLocationImages/20 - 2nd Floor Decon - Behing TV By Buy.jpg"
                         break
                     case "21":
                         locationImageSource = RebirthLocationImage21
-                        locationImage = "src/components/rebirthLuggageLocationImages/21 - Old Construction - Cement Mixer.jpg"
                         break
                     case "22":
                         locationImageSource = RebirthLocationImage22
-                        locationImage = "src/components/rebirthLuggageLocationImages/22 - Decon - Behind Crates Outside Stairs.jpg"
                         break
                     case "23":
                         locationImageSource = RebirthLocationImage23
-                        locationImage = "src/components/rebirthLuggageLocationImages/23 - Security Shack - Under Table.jpg"
                         break
                     case "24":
                         locationImageSource = RebirthLocationImage24
-                        locationImage = "24 - Living Quarter Row - Outside Parachute Above Air Conditioner.jpg"
                         break
                     case "25":
                         locationImageSource = RebirthLocationImage25
-                        locationImage = "25 - Nova - Middle Room - Behind Top Monitors.jpg"
-                        break
-                    case "26":
-                        locationImageSource = RebirthLocationImage26
-                        locationImage = "26 - Bio - Basement Piping Cubby.jpg"
                         break
                     default:
                         locationImageSource = ''
-                        locationImage = ''
+                        locationVideoSource = ''
                 }
 
-                if (this.selectedPosition === 1 || (this.selectedPosition === null && this.locationImage1Open)) {
-                    if (!this.locationImage1Open) {
-                        currentlySelectedImages = currentlySelectedImages.filter(x => x.value !== locationImage1.value);
+                let selectedPositionIndex = this.getSelectedPositionIndex()
+                if (this.selectedLocationImages[selectedPositionIndex].value !== '') {
+                    currentlySelectedImages = currentlySelectedImages.filter(x => x.value !== this.selectedLocationImages[selectedPositionIndex].value)
+                }
+                this.selectedLocationImages[selectedPositionIndex].value = locationImageSource
+                this.selectedLocationImages[selectedPositionIndex].video = locationVideoSource
+
+                /* if (this.selectedPosition === 1 || (this.selectedPosition === null && this.selectedLocationImages[0].value === '')) {
+                    if (this.selectedLocationImages[0].value !== '') {
+                        currentlySelectedImages = currentlySelectedImages.filter(x => x.value !== selectedLocationImages[0].value)
                     }
-                    this.locationImage1 = locationImageSource
-                    this.displayLocationImage1 = true
-                    this.locationImage1Open = false
+                    this.selectedLocationImages[0].value = locationImageSource
                     
-                } else if ((this.selectedPosition !== null && this.selectedPosition <= 2) || (this.selectedPosition === null && this.locationImage2Open)) {
-                    if (!this.locationImage2Open) {
-                        currentlySelectedImages = currentlySelectedImages.filter(x => x.value !== this.locationImage2.value);
+                } else if ((this.selectedPosition !== null && this.selectedPosition <= 2) || (this.selectedPosition === null && this.selectedLocationImages[1].value === '')) {
+                    if (this.selectedLocationImages[1] !== '') {
+                        currentlySelectedImages = currentlySelectedImages.filter(x => x.value !== this.selectedLocationImages[1].value)
                     }
-                    this.locationImage2 = locationImageSource
-                    this.displayLocationImage2 = true
-                    this.locationImage2Open = false
-                } else if ((this.selectedPosition !== null && this.selectedPosition <= 3) || (this.selectedPosition === null && this.locationImage3Open)) {
-                    if (!this.locationImage3Open) {
-                        currentlySelectedImages = currentlySelectedImages.filter(x => x.value !== this.locationImage3.value);
+                    this.selectedLocationImages[1].value = locationImageSource
+                } else if ((this.selectedPosition !== null && this.selectedPosition <= 3) || (this.selectedPosition === null && this.selectedLocationImages[2].value === '')) {
+                    if (this.selectedLocationImages[2] !== '') {
+                        currentlySelectedImages = currentlySelectedImages.filter(x => x.value !== this.selectedLocationImages[2].value)
                     }
-                    this.locationImage3 = locationImageSource
-                    this.displayLocationImage3 = true
-                    this.locationImage3Open = false
-                }
+                    this.selectedLocationImages[2].value = locationImageSource
+                } */
 
-                if (this.locationImage1Open === false && this.locationImage2Open === false && this.locationImage3Open === false) {
+                if (this.selectedLocationImages !== undefined && this.allPositionsFilled()) {
                     this.displayKeypad = true
+                    this.displayRebirthImages = false
                 }
 
                 this.selectedImages = [];
@@ -381,9 +389,24 @@ export default {
                     currentlySelectedImages.forEach(x => { this.selectedImages.push(x) });
                 }
 
+                // this.selectedLocationImages = this.selectedImages
+
                 this.selectedPosition = null;
             //}
             
+        },
+        getSelectedPositionIndex() {
+            if (this.selectedPosition === 1 || (this.selectedPosition === null && this.selectedLocationImages[0].value === '')) {
+                return 0
+            }
+
+            if ((this.selectedPosition !== null && this.selectedPosition <= 2) || (this.selectedPosition === null && this.selectedLocationImages[1].value === '')) {
+                return 1
+            }
+                
+            if ((this.selectedPosition !== null && this.selectedPosition <= 3) || (this.selectedPosition === null && this.selectedLocationImages[2].value === '')) {
+                return 2
+            }
         },
         selectPosition(position) {
             debugger
@@ -401,23 +424,25 @@ export default {
             }
             return false
         },
-        reset() {
+        resetImages() {
             this.selectedPosition = null
             this.locationImage1 = ''
             this.locationImage2 = ''
             this.locationImage3 = ''
-
-            this.locationImage1Open = true
-            this.locationImage2Open = true
-            this.locationImage3Open = true
-            
-            this.displayLocationImage1 = false
-            this.displayLocationImage2 = false
-            this.displayLocationImage3 = false
+        },
+        reset() {
+            this.resetImages()
 
             this.displayKeypad = false
-
+            this.displayRebirthImages = true
+            this.displayLuggageLocations = false
             this.selectedImages = []
+
+            this.selectedLocationImages = [
+                { id : 0, value : '' },
+                { id : 0, value : '' },
+                { id : 0, value : '' }
+            ]
 
             this.resetKeyCode()
         },

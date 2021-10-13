@@ -2,6 +2,30 @@ a {
     color: white;
 }
 
+#topRow {
+    display: flex;                  /* establish flex container */
+    flex-direction: row;            /* default value; can be omitted */
+    flex-wrap: nowrap;              /* default value; can be omitted */
+    justify-content: space-between; /* switched from default (flex-start, see below) */
+  }
+
+#topButtons {
+  display: flex;                  /* establish flex container */
+  flex-direction: row;            /* default value; can be omitted */
+  flex-wrap: nowrap;              /* default value; can be omitted */
+  justify-content: space-between; /* switched from default (flex-start, see below) */
+}
+
+#topButtons > div {
+    margin-right: 10px;
+    display: inline-flex;
+    position: relative;
+}
+
+#keypad-toggle {
+    min-width: 60px;
+}
+
 #luggage-locations {
     margin-bottom: 25px;
 }
@@ -11,7 +35,8 @@ a {
 }
 
 .toggle {
-    min-width: 200px;
+    min-width: 175px;
+    height: 25px;
 }
 
 .rebirth-luggage-images {
@@ -59,6 +84,8 @@ a {
 #key-pad {
     /* border: thick solid white; */
     max-width: min-content;
+    display: inline-flex;
+    width: 100%;
 }
 
 #images > div {
@@ -66,6 +93,7 @@ a {
 }
 
 .reset-images {
+    display: inline-flex;
     position: relative;
     font-family: Arial, Helvetica, sans-serif;
     vertical-align: bottom;
