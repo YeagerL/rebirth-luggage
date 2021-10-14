@@ -20,6 +20,7 @@ a {
     margin-right: 10px;
     display: inline-flex;
     position: relative;
+    color: lightgray;
 }
 
 #keypad-toggle {
@@ -37,6 +38,15 @@ a {
 .toggle {
     min-width: 175px;
     height: 25px;
+}
+
+.toggleoff {
+    background-image: -webkit-gradient(linear,left top,left bottom,from(), to(rgba(255, 68, 0, 0))) !important;
+    background-image: -webkit-linear-gradient(top,#fda25200,rgba(255, 68, 0, 0)) !important;
+    background-image: -moz-linear-gradient(top,#fda25200,rgba(255, 68, 0, 0)) !important;
+    background-image: -ms-linear-gradient(top,#fda25200,rgba(255, 68, 0, 0)) !important;
+    background-image: -o-linear-gradient(top,#fda25200,rgba(255, 68, 0, 0)) !important;
+    background-image: linear-gradient(top,#fda25200,rgba(255, 68, 0, 0)) !important;
 }
 
 .rebirth-luggage-images {
