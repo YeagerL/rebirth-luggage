@@ -41,7 +41,8 @@
         <div id="images">
             <div id="luggage-locations" v-if="displayLuggageLocations">
                 <!-- <img @click="zoomImage('../components/rebirthLuggageImages/LuggageLocations.jpg')" src="../components/rebirthLuggageImages/LuggageLocations.jpg" alt="" /> -->
-                <img src="../components/rebirthLuggageImages/LuggageLocations.png" alt="" />
+                <!-- <img src="../components/rebirthLuggageImages/RebirthIslandMapLargeLuggageLocations.jpg" alt="" /> -->
+                <img :src="luggageLocationsImage" @click="zoomImage(luggageLocationsImage)" alt="" />
             </div>
 
             <div v-if="displayRebirthImages">
@@ -131,6 +132,7 @@
   import RebirthLocationVideo01 from './rebirthLuggageLocationImages/01 - Security - Underneath Ramp At Security Comm Tower.gif'
 
   import RebirthLocationImage02 from './rebirthLuggageLocationImages/02 - Prison Reception - Underneath Staircase.jpg'
+  import RebirthLocationVideo02 from './rebirthLuggageLocationImages/02 - Prison Reception - Underneath Staircase.gif'
 
   import RebirthLocationImage03 from './rebirthLuggageLocationImages/03 - Decon 2nd Floor - Above Circuit Breakers.jpg'
   import RebirthLocationVideo03 from './rebirthLuggageLocationImages/03 - Decon 2nd Floor - Above Circuit Breakers.gif'
@@ -157,6 +159,7 @@
   import RebirthLocationVideo10 from './rebirthLuggageLocationImages/10 - Harbor - Pipes Outside.gif'
 
   import RebirthLocationImage11 from './rebirthLuggageLocationImages/11 - Red Roof - Outside Behind Boxes.jpg'
+  import RebirthLocationVideo11 from './rebirthLuggageLocationImages/11 - Red Roof - Outside Behind Boxes.gif'
 
   import RebirthLocationImage12 from './rebirthLuggageLocationImages/12 - Communication Office - Behind Ceiling Extention (Bottom floor).jpg'
   import RebirthLocationVideo12 from './rebirthLuggageLocationImages/12 - Communication Office - Behind Ceiling Extention (Bottom floor).gif'
@@ -180,11 +183,13 @@
   import RebirthLocationVideo18 from './rebirthLuggageLocationImages/18 - Middle Of Chem Tunnel - Above Bodies.gif'
 
   import RebirthLocationImage19 from './rebirthLuggageLocationImages/19 - Inside Tunnel To Prison - Behind Power Unit.jpg'
+  import RebirthLocationVideo19 from './rebirthLuggageLocationImages/19 - Inside Tunnel To Prison - Behind Power Unit.gif'
 
   import RebirthLocationImage20 from './rebirthLuggageLocationImages/20 - Decon 2nd Floor - Behind TV By Buy.jpg'
   import RebirthLocationVideo20 from './rebirthLuggageLocationImages/20 - Decon 2nd Floor - Behind TV By Buy.gif'
 
   import RebirthLocationImage22 from './rebirthLuggageLocationImages/22 - Decon - Behind Crates Outside Stairs.jpg'
+  import RebirthLocationVideo22 from './rebirthLuggageLocationImages/22 - Decon - Behind Crates Outside Stairs.gif'
 
   import RebirthLocationImage23 from './rebirthLuggageLocationImages/23 - Security Shack - Under Table.jpg'
   import RebirthLocationVideo23 from './rebirthLuggageLocationImages/23 - Security Shack - Under Table.gif'
@@ -194,6 +199,8 @@
 
   import RebirthLocationImage25 from './rebirthLuggageLocationImages/25 - Nova - Middle Room Behind Top Monitors.jpg'
   import RebirthLocationVideo25 from './rebirthLuggageLocationImages/25 - Nova - Middle Room Behind Top Monitors.gif'
+
+  import RebirthIslandMapLargeLuggageLocations from './rebirthLuggageImages/RebirthIslandMapLargeLuggageLocations.jpg'
 
   export default {
     components: {
@@ -222,7 +229,8 @@
           { id: 0, value: '' },
           { id: 0, value: '' }
         ],
-        togglegif: false
+        togglegif: false,
+        luggageLocationsImage: ''
       }
     },
     mounted() {
@@ -237,6 +245,8 @@
         { id: 0, value: '' },
         { id: 0, value: '' }
       ]
+
+      this.luggageLocationsImage = RebirthIslandMapLargeLuggageLocations
     },
     methods: {
       toggleDisplayLuggageLocations() {
@@ -260,7 +270,7 @@
         return description
       },
       zoomImage(image, title = null) {
-        const imageSource = image.value
+        const imageSource = image.value ?? image
 
         if (title === null) {
           title = (imageSource.toString().substr(imageSource.toString().indexOf(' - ') - 2, (imageSource.toString().substr(imageSource.indexOf(' - ') - 2)).indexOf('.')))
@@ -309,6 +319,7 @@
             break
           case "2":
             locationImageSource = RebirthLocationImage02
+            locationVideoSource = RebirthLocationVideo02
             break
           case "3":
             locationImageSource = RebirthLocationImage03
@@ -376,6 +387,7 @@
             break
           case "19":
             locationImageSource = RebirthLocationImage19
+            locationVideoSource = RebirthLocationVideo19
             break
           case "20":
             locationImageSource = RebirthLocationImage20
@@ -383,6 +395,7 @@
             break
           case "22":
             locationImageSource = RebirthLocationImage22
+            locationVideoSource = RebirthLocationVideo22
             break
           case "23":
             locationImageSource = RebirthLocationImage23
@@ -407,24 +420,6 @@
         }
         this.selectedLocationImages[selectedPositionIndex].value = locationImageSource
         this.selectedLocationImages[selectedPositionIndex].video = locationVideoSource
-
-        /* if (this.selectedPosition === 1 || (this.selectedPosition === null && this.selectedLocationImages[0].value === '')) {
-            if (this.selectedLocationImages[0].value !== '') {
-                currentlySelectedImages = currentlySelectedImages.filter(x => x.value !== selectedLocationImages[0].value)
-            }
-            this.selectedLocationImages[0].value = locationImageSource
-
-        } else if ((this.selectedPosition !== null && this.selectedPosition <= 2) || (this.selectedPosition === null && this.selectedLocationImages[1].value === '')) {
-            if (this.selectedLocationImages[1] !== '') {
-                currentlySelectedImages = currentlySelectedImages.filter(x => x.value !== this.selectedLocationImages[1].value)
-            }
-            this.selectedLocationImages[1].value = locationImageSource
-        } else if ((this.selectedPosition !== null && this.selectedPosition <= 3) || (this.selectedPosition === null && this.selectedLocationImages[2].value === '')) {
-            if (this.selectedLocationImages[2] !== '') {
-                currentlySelectedImages = currentlySelectedImages.filter(x => x.value !== this.selectedLocationImages[2].value)
-            }
-            this.selectedLocationImages[2].value = locationImageSource
-        } */
 
         if (this.selectedLocationImages !== undefined && this.allPositionsFilled()) {
           this.displayKeypad = true
